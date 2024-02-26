@@ -3,7 +3,7 @@
 import asyncio
 import logging
 import uuid
-from typing import Callable, Optional
+from typing import Optional
 
 from aiohttp import BasicAuth, ClientSession, ClientTimeout
 

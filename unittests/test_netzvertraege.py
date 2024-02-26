@@ -2,7 +2,7 @@ import json
 import uuid
 from pathlib import Path
 
-from aioresponses import CallbackResult, aioresponses
+from aioresponses import aioresponses
 from jsonpatch import JsonPatch  # type:ignore[import]
 
 from bssclient.models.netzvertrag import Bo4eVertrag, Netzvertrag, Vertragsstatus

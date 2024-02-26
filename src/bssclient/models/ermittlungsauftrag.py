@@ -5,7 +5,7 @@ models for Ermittlungsauftrag/Investigation Order
 from typing import Literal
 from uuid import UUID
 
-from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, RootModel, field_validator
+from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, RootModel
 
 from bssclient.models.prozess import Prozess
 

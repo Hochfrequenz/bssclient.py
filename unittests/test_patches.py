@@ -9,8 +9,8 @@ from typing import Callable
 import pytest
 from jsonpatch import JsonPatch  # type:ignore[import]
 
-from tmdsclient.models.netzvertrag import Bo4eVertrag, Netzvertrag, Vertragsstatus
-from tmdsclient.models.patches import build_json_patch_document
+from bssclient.models.netzvertrag import Bo4eVertrag, Netzvertrag, Vertragsstatus
+from bssclient.models.patches import build_json_patch_document
 
 
 def _set_netzvertrag_vertragsbeginn(nv: Netzvertrag, vertragsbeginn: datetime) -> None:

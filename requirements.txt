@@ -20,10 +20,6 @@ frozenlist==1.4.1
     #   aiosignal
 idna==3.6
     # via yarl
-jsonpatch==1.33
-    # via bssclient (pyproject.toml)
-jsonpointer==2.4
-    # via jsonpatch
 multidict==6.0.5
     # via
     #   aiohttp

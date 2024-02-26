@@ -13,11 +13,11 @@ async def bss_client_with_default_auth() -> AsyncGenerator[tuple[BssClient, BssC
     (and the code after yield the test execution)
     :return:
     """
-    tmds_config = BssConfig(
+    bss_config = BssConfig(
         server_url=URL("https://bss.inv/"),
         usr="my-usr",
         pwd="my-pwd",
     )
-    client = BssClient(tmds_config)
-    yield client, tmds_config
+    client = BssClient(bss_config)
+    yield client, bss_config
     await client.close_session()

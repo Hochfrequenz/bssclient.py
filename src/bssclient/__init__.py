@@ -5,5 +5,5 @@ Find the TMDS Open API description here: https://techmasterdata.xtk-dev.de/index
 """
 
 # convenience exports
-from .client.bssclient import bssclient
-from .client.config import TmdsConfig
+from .client.bssclient import BssClient
+from .client.config import BssConfig

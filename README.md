@@ -20,11 +20,12 @@ pip install bssclient
 ```
 
 ## Usage
+
 ```python
 from yarl import URL
-from bssclient import bssclient, TmdsConfig
+from bssclient import bssclient, BssConfig
 
-tmds_config = TmdsConfig(
+tmds_config = BssConfig(
     server_url=URL("https://my-tmds.xtk-test.org/"),
     usr="my-usr",
     pwd="my-pwd",

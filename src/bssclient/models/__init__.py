@@ -1,3 +1,3 @@
 """
-'models' contains the TMDS data model (or at least the part which we use in this client)
+'models' contains the BSS data model (or at least the part which we use in this client)
 """

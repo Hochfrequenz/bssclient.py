@@ -1,21 +1,21 @@
 """
-contains a class with which the TMDS client is instantiated/configured
+contains a class with which the BSS client is instantiated/configured
 """
 
 from pydantic import BaseModel, ConfigDict, field_validator
 from yarl import URL
 
 
-class TmdsConfig(BaseModel):
+class BssConfig(BaseModel):
     """
-    A class to hold the configuration for the TMDS client
+    A class to hold the configuration for the BSS client
     """
 
     model_config = ConfigDict(frozen=True, arbitrary_types_allowed=True)
 
     server_url: URL
     """
-    e.g. URL("https://techmasterdata.xtk-dev.de")
+    e.g. URL("https://basicsupply.xtk-stage.de/")
     """
     usr: str
     """
@@ -48,5 +48,5 @@ class TmdsConfig(BaseModel):
         if not isinstance(value, URL):
             raise ValueError("Invalid URL type")
         if len(value.parts) > 2:
-            raise ValueError("You must provide a base_url without any parts, e.g. https://techmasterdata.xtk-prod.de")
+            raise ValueError("You must provide a base_url without any parts, e.g. https://basicsupply.xtk-prod.de/")
         return value

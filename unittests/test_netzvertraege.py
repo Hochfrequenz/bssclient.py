@@ -12,24 +12,24 @@ class TestGetNetzvertraege:
     A class with pytest unit tests.
     """
 
-    async def test_get_netzvertrag_by_id(self, tmds_client_with_default_auth):
+    async def test_get_netzvertrag_by_id(self, bss_client_with_default_auth):
         netzvertrag_json_file = Path(__file__).parent / "example_data" / "single_netzvertrag.json"
         with open(netzvertrag_json_file, "r", encoding="utf-8") as infile:
             netzvertrag_json = json.load(infile)
         nv_id = uuid.UUID("3e15bf73-ea1b-4f50-8f18-3288074a4fec")
-        client, tmds_config = tmds_client_with_default_auth
+        client, tmds_config = bss_client_with_default_auth
         with aioresponses() as mocked_tmds:
             mocked_get_url = f"{tmds_config.server_url}api/Netzvertrag/{nv_id}"
             mocked_tmds.get(mocked_get_url, status=200, payload=netzvertrag_json)
             actual = await client.get_netzvertrag_by_id(nv_id)
         assert isinstance(actual, Netzvertrag)
 
-    async def test_get_netzvertraege_by_melo(self, tmds_client_with_default_auth):
+    async def test_get_netzvertraege_by_melo(self, bss_client_with_default_auth):
         netzvertraege_json_file = Path(__file__).parent / "example_data" / "list_of_netzvertraege.json"
         with open(netzvertraege_json_file, "r", encoding="utf-8") as infile:
             netzvertraege_json = json.load(infile)
         melo_id = "DE0011122233344455566677788899900"
-        client, tmds_config = tmds_client_with_default_auth
+        client, tmds_config = bss_client_with_default_auth
         with aioresponses() as mocked_tmds:
             mocked_get_url = f"{tmds_config.server_url}api/Netzvertrag/find?messlokation={melo_id}"
             mocked_tmds.get(mocked_get_url, status=200, payload=netzvertraege_json)
@@ -41,13 +41,13 @@ class TestGetNetzvertraege:
         assert any(actual[0].model_extra), "Unmapped properties should be stored in model_extra (Netzvertrag)"
         assert any(actual[0].bo_model.model_extra), "Unmapped properties should be stored in model_extra (Bo4eVertrag)"
 
-    async def test_update_netzvertrag(self, tmds_client_with_default_auth):
+    async def test_update_netzvertrag(self, bss_client_with_default_auth):
         netzvertrag_json_file = Path(__file__).parent / "example_data" / "single_netzvertrag.json"
         with open(netzvertrag_json_file, "r", encoding="utf-8") as infile:
             netzvertrag_json = json.load(infile)
 
         nv_id = uuid.UUID("3e15bf73-ea1b-4f50-8f18-3288074a4fec")
-        client, tmds_config = tmds_client_with_default_auth
+        client, tmds_config = bss_client_with_default_auth
 
         def set_status_to_storniert(nv: Netzvertrag) -> None:
             assert nv.bo_model is not None

@@ -8,14 +8,14 @@ from typing import Optional
 from aiohttp import BasicAuth, ClientSession, ClientTimeout
 
 from bssclient.client.config import BssConfig
-from bssclient.models.netzvertrag import Netzvertrag, _ListOfNetzvertraege
+from bssclient.models.ermittlungsauftrag import Ermittlungsauftrag, _ListOfErmittlungsauftraege
 
 _logger = logging.getLogger(__name__)
 
 
 class BssClient:
     """
-    an async wrapper around the TMDS API
+    an async wrapper around the BSS API
     """
 
     def __init__(self, config: BssConfig):
@@ -52,38 +52,23 @@ class BssClient:
                 await self._session.close()
                 self._session = None
 
-    async def get_netzvertraege_for_melo(self, melo_id: str) -> list[Netzvertrag]:
+    async def get_ermittlungsauftraege(self, limit: int = 0, offset: int = 0) -> list[Ermittlungsauftrag]:
         """
-        provide a melo id, e.g. 'DE1234567890123456789012345678901' and get the corresponding netzvertrag
+        get all ermittlungsauftrage in the specified range
         """
-        if not melo_id:
-            raise ValueError("You must not provide an empty melo_id")
         session = await self._get_session()
-        request_url = self._config.server_url / "api" / "Netzvertrag" / "find" % {"messlokation": melo_id}
+        request_url = (
+            self._config.server_url
+            / "api"
+            / "Aufgabe"
+            / "ermittlungsauftraege"
+            % {"limit": limit, "offset": offset, "includeDetails": "true"}
+        )
         request_uuid = uuid.uuid4()
         _logger.debug("[%s] requesting %s", str(request_uuid), request_url)
         async with session.get(request_url) as response:
             response.raise_for_status()  # endpoint returns an empty list but no 404
             _logger.debug("[%s] response status: %s", str(request_uuid), response.status)
             response_json = await response.json()
-            _list_of_netzvertraege = _ListOfNetzvertraege.model_validate(response_json)
-        return _list_of_netzvertraege.root
-
-    async def get_netzvertrag_by_id(self, nv_id: uuid.UUID) -> Netzvertrag | None:
-        """
-        provide a UUID, get the matching netzvertrag in return (or None, if 404)
-        """
-        session = await self._get_session()
-        request_url = self._config.server_url / "api" / "Netzvertrag" / str(nv_id)
-        request_uuid = uuid.uuid4()
-        _logger.debug("[%s] requesting %s", str(request_uuid), request_url)
-        async with session.get(request_url) as response:
-            try:
-                if response.status == 404:
-                    return None
-                response.raise_for_status()
-            finally:
-                _logger.debug("[%s] response status: %s", str(request_uuid), response.status)
-            response_json = await response.json()
-            result = Netzvertrag.model_validate(response_json)
-        return result
+            _list_of_ermittlungsauftraege = _ListOfErmittlungsauftraege.model_validate(response_json)
+        return _list_of_ermittlungsauftraege.root

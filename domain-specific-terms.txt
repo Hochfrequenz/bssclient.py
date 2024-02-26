@@ -3,3 +3,6 @@ openend
 adresse
 objekt
 oder
+prozess
+autor
+titel

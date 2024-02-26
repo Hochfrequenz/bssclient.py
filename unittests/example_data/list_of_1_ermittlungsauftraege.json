@@ -1,0 +1,116 @@
+[
+	{
+		"einheitId": "1c6a4f15-7b1d-4566-a0a1-877389306060",
+		"flatId": "40444339",
+		"lagezusatz": "Part.",
+		"geschaeftspartner": {
+			"boTyp": "GESCHAEFTSPARTNER",
+			"versionStruktur": "1",
+			"timestamp": "2024-02-20T08:30:48.374243",
+			"externeReferenzen": null,
+			"guid": "98692222-57ec-4dba-ba74-651bba9768ab",
+			"anrede": null,
+			"title": null,
+			"name1": "Mein Versorger GmbH",
+			"name2": null,
+			"name3": "Ersatzversorgung",
+			"gewerbekennzeichnung": true,
+			"hrnummer": null,
+			"amtsgericht": null,
+			"kontaktweg": null,
+			"umsatzsteuerId": null,
+			"glaeubigerId": null,
+			"eMailAdresse": null,
+			"website": null,
+			"geschaeftspartnerrolle": null,
+			"partneradresse": null,
+			"grundlageZurVerringerungDerUmlagenNachEnfg": null
+		},
+		"marktlokationId": "52671494807",
+		"messlokationId": "DE00011122233344455566677788899900012",
+		"zaehlernummer": "12345678",
+		"vertragId": "8d074ec4-37f3-466d-9083-75e148153b96",
+		"lieferbeginn": "2023-10-31T23:00:00+00:00",
+		"lieferende": null,
+		"lieferadresse": {
+			"timestamp": "2021-10-11T10:02:09.153356+00:00",
+			"guid": "087a198e-1f8c-45bd-a04c-3410c4b88211",
+			"postleitzahl": "12117",
+			"ort": "Neustadt",
+			"strasse": "Neue Str.",
+			"hausnummer": "98",
+			"postfach": null,
+			"adresszusatz": null,
+			"coErgaenzung": null,
+			"landescode": "DE",
+			"ortsteil": "Schönefeld",
+			"versionStruktur": 1
+		},
+		"notizen": [
+			{
+				"autor": "System",
+				"zeitpunkt": "2024-02-20T08:30:48.317648+00:00",
+				"inhalt": "Der Ermittlungsauftrag wurde erstellt und geht in die Wartezeit über.",
+				"timestamp": "2024-02-20T08:30:48.37542+00:00",
+				"guid": "98d3c039-fe24-400f-bb76-dbb752e5cbc8",
+				"historisch": true
+			},
+			{
+				"autor": "System",
+				"zeitpunkt": "2024-02-20T08:46:23.692438+00:00",
+				"inhalt": "Der zugehörige Eigentümer 10012345 wurde ermittelt und für die vorliegende Einheit angemeldet.",
+				"timestamp": "2024-02-20T08:46:23.728174+00:00",
+				"guid": "f5031b1b-8201-4abf-9e69-201bfff28f48"
+			}
+		],
+		"verwalterName": null,
+		"verwalterMobil": null,
+		"verwalterId": "00000000-0000-0000-0000-000000000000",
+		"id": "6f15832e-27f7-414f-92f3-db9f8724488c",
+		"agentId": null,
+		"prozess": {
+			"id": "1afe5dd2-e79d-45ac-9849-2bdea4036b18",
+			"status": "Beendet",
+			"statusText": "Prozess wurde automatisch beendet",
+			"typ": "Leerstand",
+			"ausloeser": "Dei Mudder ihr Prozess",
+			"externeId": "EJ00102020304050KMLKSDMLAKSMDS",
+			"marktlokation": "52671494807",
+			"ideReferenz": "EJ00102020304050KMLKSDMLAKSMDS",
+			"transaktionsgrund": "Z36",
+			"ausloeserDaten": "{\"ExterneID\":\"EJ00102020304050KMLKSDMLAKSMDS\",\"stammdaten\":[{\"boTyp\":\"MARKTLOKATION\",\"versionStruktur\":\"1\",\"externeReferenzen\":null,\"marktlokationsId\":\"52671494807\",\"sparte\":4,\"energierichtung\":null,\"bilanzierungsmethode\":null,\"verbrauchsart\":null,\"unterbrechbar\":null,\"netzebene\":null,\"netzbetreiberCodeNr\":null,\"gebietTyp\":null,\"netzgebietNr\":null,\"bilanzierungsgebiet\":null,\"grundversorgerCodeNr\":null,\"gasqualitaet\":null,\"lokationsadresse\":{\"postleitzahl\":\"12117\",\"ort\":\"Neustadt\",\"strasse\":\"Neue Str.\",\"hausnummer\":\"98\",\"postfach\":null,\"adresszusatz\":null,\"coErgaenzung\":null,\"landescode\":61,\"ortsteil\":\"Südstadt\"},\"geoadresse\":null,\"katasterinformation\":null,\"marktrollen\":null,\"regelzone\":null,\"marktgebiet\":null,\"zeitreihentyp\":null,\"zaehlwerke\":[{\"zaehlwerkId\":null,\"bezeichnung\":null,\"richtung\":null,\"obisKennzahl\":null,\"wandlerfaktor\":null,\"einheit\":null,\"kennzahl\":null,\"schwachlastfaehig\":null,\"verwendungszwecke\":[],\"verbrauchsart\":null,\"unterbrechbarkeit\":null,\"waermenutzung\":null,\"konzessionsabgabe\":null,\"steuerbefreit\":null,\"vorkommastelle\":null,\"nachkommastelle\":null,\"abrechnungsrelevant\":null,\"anzahlAblesungen\":1,\"zaehlzeiten\":null,\"konfiguration\":null}],\"zaehlwerkeBeteiligteMarktrolle\":null,\"verbrauchsmenge\":null,\"messlokationen\":null,\"zugehoerigeMesslokationen\":null,\"messtechnischeEinordnung\":null,\"netznutzungsabrechnungsdaten\":null,\"sperrstatus\":0,\"messprodukte\":null,\"konfigurationsprodukte\":null},{\"boTyp\":\"VERTRAG\",\"versionStruktur\":\"1\",\"externeReferenzen\":null,\"vertragsnummer\":\"52671494807\",\"beschreibung\":null,\"vertragsart\":0,\"vertragstatus\":null,\"sparte\":4,\"vertragsbeginn\":\"2023-10-31T23:00:00+00:00\",\"vertragsende\":null,\"vertragspartner1\":null,\"vertragspartner2\":{\"boTyp\":\"GESCHAEFTSPARTNER\",\"versionStruktur\":\"1\",\"externeReferenzen\":null,\"anrede\":null,\"title\":null,\"name1\":\"Mein Versorger GmbH\",\"name2\":null,\"name3\":\"Ersatzversorgung\",\"gewerbekennzeichnung\":true,\"hrnummer\":null,\"amtsgericht\":null,\"kontaktweg\":null,\"umsatzsteuerId\":null,\"glaeubigerId\":null,\"eMailAdresse\":null,\"website\":null,\"geschaeftspartnerrolle\":null,\"partneradresse\":{\"postleitzahl\":\"82031\",\"ort\":\"Neustadt\",\"strasse\":\"Teststr.\",\"hausnummer\":\"37\",\"postfach\":null,\"adresszusatz\":null,\"coErgaenzung\":null,\"landescode\":61,\"ortsteil\":\"Neustädter Altstadt\"},\"grundlageZurVerringerungDerUmlagenNachEnfg\":null},\"unterzeichnervp1\":null,\"unterzeichnervp2\":null,\"vertragskonditionen\":{\"beschreibung\":null,\"anzahlAbschlaege\":null,\"vertragslaufzeit\":null,\"kuendigungsfrist\":null,\"vertragsverlaengerung\":null,\"abschlagszyklus\":null,\"startAbrechnungsjahr\":null,\"geplanteTurnusablesung\":{\"einheit\":null,\"dauer\":null,\"startdatum\":\"2024-01-14T23:00:00+00:00\",\"enddatum\":\"2024-02-07T23:00:00+00:00\",\"startzeitpunkt\":\"2024-01-14T23:00:00+00:00\",\"endzeitpunkt\":\"2024-02-07T23:00:00+00:00\"},\"turnusablesungIntervall\":12,\"netznutzungsabrechnung\":null,\"netznutzungsabrechnungIntervall\":null,\"haushaltskunde\":true,\"netznutzungsvertrag\":1,\"netznutzungszahler\":1,\"netznutzungsabrechnungsvariante\":0,\"netznutzungsabrechnungsgrundlage\":null,\"beinhaltetSingulaerGenutzteBetriebsmittel\":null},\"vertragsteile\":null,\"gemeinderabatt\":0.00,\"korrespondenzpartner\":null},{\"boTyp\":\"ZAEHLER\",\"versionStruktur\":\"1\",\"externeReferenzen\":null,\"zaehlernummer\":\"12345678\",\"sparte\":4,\"zaehlerauspraegung\":null,\"zaehlertyp\":13,\"tarifart\":null,\"zaehlerkonstante\":1.0,\"eichungBis\":null,\"letzteEichung\":null,\"zaehlwerke\":[{\"zaehlwerkId\":null,\"bezeichnung\":\"1.00000\",\"richtung\":null,\"obisKennzahl\":\"8-0:1.0.0*375\",\"wandlerfaktor\":null,\"einheit\":null,\"kennzahl\":null,\"schwachlastfaehig\":null,\"verwendungszwecke\":null,\"verbrauchsart\":null,\"unterbrechbarkeit\":null,\"waermenutzung\":null,\"konzessionsabgabe\":null,\"steuerbefreit\":null,\"vorkommastelle\":5,\"nachkommastelle\":3,\"abrechnungsrelevant\":null,\"anzahlAblesungen\":1,\"zaehlzeiten\":null,\"konfiguration\":null}],\"gateway\":null,\"fernschaltung\":null,\"messwerterfassung\":1,\"zaehlertypspezifikation\":null,\"befestigungsart\":null,\"zaehlergroesse\":41,\"geraete\":null},{\"boTyp\":\"MESSLOKATION\",\"versionStruktur\":\"1\",\"externeReferenzen\":null,\"messlokationsId\":\"DE00011122233344455566677788899900012\",\"sparte\":4,\"netzebeneMessung\":null,\"messgebietNr\":null,\"grundzustaendigerMSBCodeNr\":null,\"grundzustaendigerMSBIMCodeNr\":null,\"grundzustaendigerMDLCodeNr\":null,\"messadresse\":null,\"geoadresse\":null,\"katasterinformation\":null,\"geraete\":null,\"messdienstleistung\":null,\"messlokationszaehler\":null,\"bilanzierungsmethode\":null,\"abrechnungmessstellenbetriebnna\":null,\"marktrollen\":[{\"rollencodenummer\":null,\"code\":\"M34ENG\",\"marktrolle\":2,\"weiterverpflichtet\":null},{\"rollencodenummer\":null,\"code\":\"M34ENG\",\"marktrolle\":14,\"weiterverpflichtet\":null}],\"verlustfaktor\":null,\"zaehlwerke\":null,\"messprodukte\":null},{\"boTyp\":\"ANSPRECHPARTNER\",\"versionStruktur\":\"1\",\"externeReferenzen\":null,\"anrede\":null,\"inviduelleAnrede\":null,\"titel\":null,\"vorname\":null,\"nachname\":\"Mein Versorger GmbH\",\"eMailAdresse\":null,\"kommentar\":\"Ersatzversorgung\",\"geschaeftspartner\":null,\"adresse\":{\"postleitzahl\":\"82031\",\"ort\":\"Neustadt\",\"strasse\":\"Teststr.\",\"hausnummer\":\"37\",\"postfach\":null,\"adresszusatz\":null,\"coErgaenzung\":null,\"landescode\":61,\"ortsteil\":\"Neustädter Altstadt\"},\"rufnummern\":null,\"zustaendigkeit\":[{\"jobtitel\":null,\"abteilung\":null,\"themengebiet\":\"MSCONS\"}],\"gewerbekennzeichnung\":{\"ValueKind\":5}},{\"boTyp\":\"ANSPRECHPARTNER\",\"versionStruktur\":\"1\",\"externeReferenzen\":null,\"anrede\":null,\"inviduelleAnrede\":null,\"titel\":null,\"vorname\":null,\"nachname\":\"Mein Versorger GmbH\",\"eMailAdresse\":null,\"kommentar\":\"Ersatzversorgung\",\"geschaeftspartner\":null,\"adresse\":{\"postleitzahl\":\"82031\",\"ort\":\"Neustadt\",\"strasse\":\"Teststr.\",\"hausnummer\":\"37\",\"postfach\":null,\"adresszusatz\":null,\"coErgaenzung\":null,\"landescode\":61,\"ortsteil\":\"Neustädter Altstadt\"},\"rufnummern\":null,\"zustaendigkeit\":[{\"jobtitel\":null,\"abteilung\":null,\"themengebiet\":\"LIEFERANTENWECHSEL\"}],\"gewerbekennzeichnung\":{\"ValueKind\":5}},{\"boTyp\":\"BILANZIERUNG\",\"versionStruktur\":\"1\",\"externeReferenzen\":null,\"marktlokationsId\":null,\"lastprofile\":null,\"bilanzierungsbeginn\":\"2023-11-30T23:00:00+00:00\",\"bilanzierungsende\":null,\"bilanzkreis\":\"BE_WASSER\",\"jahresverbrauchsprognose\":{\"wert\":0.0,\"einheit\":2000},\"temperaturarbeit\":null,\"kundenwert\":null,\"verbrauchsaufteilung\":null,\"zeitreihentyp\":null,\"aggregationsverantwortung\":null,\"prognosegrundlage\":1,\"detailsPrognosegrundlage\":null,\"wahlrechtPrognosegrundlage\":null,\"fallgruppenzuordnung\":null,\"prioritaet\":null,\"grundWahlrechtPrognosegrundlage\":null,\"abwicklungsmodell\":null},{\"boTyp\":\"MARKTTEILNEHMER\",\"versionStruktur\":\"1\",\"externeReferenzen\":null,\"anrede\":null,\"title\":null,\"name1\":null,\"name2\":null,\"name3\":null,\"gewerbekennzeichnung\":true,\"hrnummer\":null,\"amtsgericht\":null,\"kontaktweg\":null,\"umsatzsteuerId\":null,\"glaeubigerId\":null,\"eMailAdresse\":null,\"website\":null,\"geschaeftspartnerrolle\":null,\"partneradresse\":null,\"grundlageZurVerringerungDerUmlagenNachEnfg\":null,\"marktrolle\":null,\"rollencodenummer\":\"N34ENG\",\"rollencodetyp\":9,\"makoadresse\":null,\"ansprechpartner\":null},{\"boTyp\":\"MARKTTEILNEHMER\",\"versionStruktur\":\"1\",\"externeReferenzen\":null,\"anrede\":null,\"title\":null,\"name1\":null,\"name2\":null,\"name3\":null,\"gewerbekennzeichnung\":true,\"hrnummer\":null,\"amtsgericht\":null,\"kontaktweg\":null,\"umsatzsteuerId\":null,\"glaeubigerId\":null,\"eMailAdresse\":null,\"website\":null,\"geschaeftspartnerrolle\":null,\"partneradresse\":null,\"grundlageZurVerringerungDerUmlagenNachEnfg\":null,\"marktrolle\":null,\"rollencodenummer\":\"9988776655443\",\"rollencodetyp\":9,\"makoadresse\":null,\"ansprechpartner\":null}],\"transaktionsdaten\":{\"sparte\":\"WASSER\",\"vorgangsnummer\":\"EJ00102020304050KMLKSDMLAKSMDS\",\"transaktionsgrund\":\"Z36\",\"vertragsbeginn\":\"2023-10-31T23:00:00Z\",\"prozessdatum\":\"2023-10-31T23:00:00Z\",\"nächsteNetznutzungsabrechnung\":\"2024\",\"pruefidentifikator\":\"11013\",\"netznutzungsabrechnungsintervall\":\"12\",\"datenaustauschreferenz\":\"DKEMALKDMELEK1\",\"absender\":\"bo4e://Marktteilnehmer/N34ENG\",\"empfaenger\":\"bo4e://Marktteilnehmer/9988776655443\",\"dokumentennummer\":\"DKEMALKDMELEK1\",\"kategorie\":\"E01\",\"nachrichtendatum\":\"2023-11-08T03:01:00Z\",\"nachrichtenReferenznummer\":\"DKEMALKDMELEK1\"},\"links\":{\"bo4e://Messlokation/DE00011122233344455566677788899900012/Messlokationszaehler\":[\"bo4e://zaehler/12345678\"],\"bo4e://Ansprechpartner/Name und Adresse für die Ablesekarte/Messlokation\":[\"bo4e://messlokation/DE00011122233344455566677788899900012\"]}}",
+			"datumErzeugt": "2024-02-20T08:30:45.232244+00:00",
+			"datumGeaendert": "2024-02-20T08:30:45.36299+00:00",
+			"datumBeendet": null,
+			"antwortStatus": "E15",
+			"einheit": "40444339",
+			"messlokation": "DE00011122233344455566677788899900012",
+			"zaehlernummer": "12345678",
+			"adresse": null
+		},
+		"verwandteAufgaben": [],
+		"status": "Beendet",
+		"statusGrund": "Vermieter angemeldet",
+		"bearbeiter": "System",
+		"text": "Leerstand wartet auf Eigentümeridentifikation.",
+		"datumErzeugt": "2024-02-20T08:30:98.300278+00:00",
+		"datumGeaendert": "2024-02-20T08:30:48.062698+00:00",
+		"datumAblauf": "2024-02-20T08:45:98.300328+00:00",
+		"datumMaximaleFrist": "2023-12-11T23:00:00+00:00",
+		"kategorie": "Ermittlungsauftrag",
+		"aufgabenDaten": [
+			{
+				"id": "86c50937-052e-49f6-b4d3-ad80dc272b37",
+				"name": "Messlokation",
+				"wert": "{\"boTyp\":\"MESSLOKATION\",\"versionStruktur\":\"1\",\"externeReferenzen\":null,\"messlokationsId\":\"DE00011122233344455566677788899900012\",\"sparte\":\"WASSER\",\"netzebeneMessung\":null,\"messgebietNr\":null,\"grundzustaendigerMSBCodeNr\":null,\"grundzustaendigerMSBIMCodeNr\":null,\"grundzustaendigerMDLCodeNr\":null,\"messadresse\":null,\"geoadresse\":null,\"katasterinformation\":null,\"geraete\":null,\"messdienstleistung\":null,\"messlokationszaehler\":[{\"boTyp\":\"ZAEHLER\",\"versionStruktur\":\"1\",\"externeReferenzen\":null,\"zaehlernummer\":\"12345678\",\"sparte\":\"WASSER\",\"zaehlerauspraegung\":null,\"zaehlertyp\":\"WASSERZAEHLER\",\"tarifart\":null,\"zaehlerkonstante\":1.0,\"eichungBis\":null,\"letzteEichung\":null,\"zaehlwerke\":[{\"zaehlwerkId\":\"0\",\"bezeichnung\":\"\",\"richtung\":null,\"obisKennzahl\":\"8-0:1.0.0*375\",\"wandlerfaktor\":null,\"einheit\":null,\"kennzahl\":null,\"schwachlastfaehig\":null,\"verwendungszwecke\":null,\"verbrauchsart\":null,\"unterbrechbarkeit\":null,\"waermenutzung\":null,\"konzessionsabgabe\":null,\"steuerbefreit\":null,\"vorkommastelle\":5,\"nachkommastelle\":3,\"abrechnungsrelevant\":null,\"anzahlAblesungen\":1,\"zaehlzeiten\":null,\"konfiguration\":null}],\"gateway\":null,\"fernschaltung\":null,\"messwerterfassung\":\"MANUELL_AUSGELESENE\",\"zaehlertypspezifikation\":null,\"befestigungsart\":null,\"zaehlergroesse\":\"WASSER_WZ01\",\"geraete\":null}],\"bilanzierungsmethode\":null,\"abrechnungmessstellenbetriebnna\":null,\"marktrollen\":[{\"rollencodenummer\":null,\"code\":\"M34ENG\",\"marktrolle\":\"MSB\",\"weiterverpflichtet\":null},{\"rollencodenummer\":null,\"code\":\"M34ENG\",\"marktrolle\":\"GMSB\",\"weiterverpflichtet\":null}],\"verlustfaktor\":null,\"zaehlwerke\":null,\"messprodukte\":null}",
+				"timestamp": "2024-02-20T08:30:48.062698+00:00"
+			},
+			{
+				"id": "a8c63c35-1373-456f-9617-2c914fc10a9d",
+				"name": "Marktlokation",
+				"wert": "{\"boTyp\":\"MARKTLOKATION\",\"versionStruktur\":\"1\",\"externeReferenzen\":null,\"marktlokationsId\":\"52671494807\",\"sparte\":\"WASSER\",\"energierichtung\":null,\"bilanzierungsmethode\":\"SLP\",\"verbrauchsart\":null,\"unterbrechbar\":null,\"netzebene\":null,\"netzbetreiberCodeNr\":null,\"gebietTyp\":null,\"netzgebietNr\":null,\"bilanzierungsgebiet\":null,\"grundversorgerCodeNr\":null,\"gasqualitaet\":null,\"lokationsadresse\":{\"postleitzahl\":\"12117\",\"ort\":\"Neustadt\",\"strasse\":\"Neue Str.\",\"hausnummer\":\"98\",\"postfach\":null,\"adresszusatz\":null,\"coErgaenzung\":null,\"landescode\":\"DE\",\"ortsteil\":\"Südstadt\"},\"geoadresse\":null,\"katasterinformation\":null,\"marktrollen\":null,\"regelzone\":null,\"marktgebiet\":null,\"zeitreihentyp\":null,\"zaehlwerke\":[{\"zaehlwerkId\":null,\"bezeichnung\":null,\"richtung\":null,\"obisKennzahl\":null,\"wandlerfaktor\":null,\"einheit\":null,\"kennzahl\":null,\"schwachlastfaehig\":null,\"verwendungszwecke\":[],\"verbrauchsart\":null,\"unterbrechbarkeit\":null,\"waermenutzung\":null,\"konzessionsabgabe\":null,\"steuerbefreit\":null,\"vorkommastelle\":null,\"nachkommastelle\":null,\"abrechnungsrelevant\":null,\"anzahlAblesungen\":1,\"zaehlzeiten\":null,\"konfiguration\":null}],\"zaehlwerkeBeteiligteMarktrolle\":null,\"verbrauchsmenge\":[{\"startdatum\":null,\"enddatum\":null,\"type\":\"VERANSCHLAGTEJAHRESMENGE\",\"tarifstufe\":null,\"wertermittlungsverfahren\":null,\"messwertstatus\":null,\"statuszusatzinformationen\":null,\"obiskennzahl\":\"\",\"wert\":0.0,\"einheit\":\"KWH\",\"nutzungszeitpunkt\":null,\"ausfuehrungszeitpunkt\":null}],\"messlokationen\":[{\"boTyp\":\"MESSLOKATION\",\"versionStruktur\":\"1\",\"externeReferenzen\":null,\"messlokationsId\":\"DE00011122233344455566677788899900012\",\"sparte\":\"WASSER\",\"netzebeneMessung\":null,\"messgebietNr\":null,\"grundzustaendigerMSBCodeNr\":null,\"grundzustaendigerMSBIMCodeNr\":null,\"grundzustaendigerMDLCodeNr\":null,\"messadresse\":null,\"geoadresse\":null,\"katasterinformation\":null,\"geraete\":null,\"messdienstleistung\":null,\"messlokationszaehler\":[{\"boTyp\":\"ZAEHLER\",\"versionStruktur\":\"1\",\"externeReferenzen\":null,\"zaehlernummer\":\"12345678\",\"sparte\":\"WASSER\",\"zaehlerauspraegung\":null,\"zaehlertyp\":\"WASSERZAEHLER\",\"tarifart\":null,\"zaehlerkonstante\":1.0,\"eichungBis\":null,\"letzteEichung\":null,\"zaehlwerke\":[{\"zaehlwerkId\":\"0\",\"bezeichnung\":\"\",\"richtung\":null,\"obisKennzahl\":\"8-0:1.0.0*375\",\"wandlerfaktor\":null,\"einheit\":null,\"kennzahl\":null,\"schwachlastfaehig\":null,\"verwendungszwecke\":null,\"verbrauchsart\":null,\"unterbrechbarkeit\":null,\"waermenutzung\":null,\"konzessionsabgabe\":null,\"steuerbefreit\":null,\"vorkommastelle\":5,\"nachkommastelle\":3,\"abrechnungsrelevant\":null,\"anzahlAblesungen\":1,\"zaehlzeiten\":null,\"konfiguration\":null}],\"gateway\":null,\"fernschaltung\":null,\"messwerterfassung\":\"MANUELL_AUSGELESENE\",\"zaehlertypspezifikation\":null,\"befestigungsart\":null,\"zaehlergroesse\":\"WASSER_WZ01\",\"geraete\":null}],\"bilanzierungsmethode\":null,\"abrechnungmessstellenbetriebnna\":null,\"marktrollen\":[{\"rollencodenummer\":null,\"code\":\"M34ENG\",\"marktrolle\":\"MSB\",\"weiterverpflichtet\":null},{\"rollencodenummer\":null,\"code\":\"M34ENG\",\"marktrolle\":\"GMSB\",\"weiterverpflichtet\":null}],\"verlustfaktor\":null,\"zaehlwerke\":null,\"messprodukte\":null}],\"zugehoerigeMesslokationen\":null,\"messtechnischeEinordnung\":null,\"netznutzungsabrechnungsdaten\":null,\"sperrstatus\":\"ENTSPERRT\",\"messprodukte\":null,\"konfigurationsprodukte\":null}",
+				"timestamp": "2024-02-20T08:30:48.062698+00:00"
+			}
+		]
+	}
+]

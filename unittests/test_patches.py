@@ -7,9 +7,10 @@ from datetime import datetime, timezone
 from typing import Callable
 
 import pytest
+from jsonpatch import JsonPatch  # type:ignore[import]
+
 from bssclient.models.netzvertrag import Bo4eVertrag, Netzvertrag, Vertragsstatus
 from bssclient.models.patches import build_json_patch_document
-from jsonpatch import JsonPatch  # type:ignore[import]
 
 
 def _set_netzvertrag_vertragsbeginn(nv: Netzvertrag, vertragsbeginn: datetime) -> None:

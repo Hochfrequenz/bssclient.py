@@ -3,8 +3,9 @@ import uuid
 from pathlib import Path
 
 from aioresponses import CallbackResult, aioresponses
-from bssclient.models.netzvertrag import Bo4eVertrag, Netzvertrag, Vertragsstatus
 from jsonpatch import JsonPatch  # type:ignore[import]
+
+from bssclient.models.netzvertrag import Bo4eVertrag, Netzvertrag, Vertragsstatus
 
 
 class TestGetNetzvertraege:

@@ -1,8 +1,9 @@
 from typing import AsyncGenerator
 
 import pytest
-from bssclient import BssConfig, BssClient
 from yarl import URL
+
+from bssclient import BssClient, BssConfig
 
 
 @pytest.fixture

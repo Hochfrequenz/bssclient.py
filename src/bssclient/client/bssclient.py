@@ -9,7 +9,6 @@ from aiohttp import BasicAuth, ClientSession, ClientTimeout
 
 from bssclient.client.config import BssConfig
 from bssclient.models.netzvertrag import Netzvertrag, _ListOfNetzvertraege
-from bssclient.models.patches import build_json_patch_document
 
 _logger = logging.getLogger(__name__)
 
@@ -85,29 +84,6 @@ class BssClient:
                 response.raise_for_status()
             finally:
                 _logger.debug("[%s] response status: %s", str(request_uuid), response.status)
-            response_json = await response.json()
-            result = Netzvertrag.model_validate(response_json)
-        return result
-
-    async def update_netzvertrag(
-        self, netzvertrag_id: uuid.UUID, changes: list[Callable[[Netzvertrag], None]]
-    ) -> Netzvertrag:
-        """
-        patch the given netzvertrag using the changes
-        """
-        session = await self._get_session()
-        netzvertrag = await self.get_netzvertrag_by_id(netzvertrag_id)
-        if netzvertrag is None:
-            raise ValueError(f"Netzvertrag with id {netzvertrag_id} not found")
-        patch_document = build_json_patch_document(netzvertrag, changes)
-        request_url = self._config.server_url / "api" / "v2" / "Netzvertrag" / str(netzvertrag_id)
-        request_uuid = uuid.uuid4()
-        _logger.debug("[%s] requesting %s", str(request_uuid), request_url)
-        async with session.patch(
-            request_url, json=patch_document.patch, headers={"Content-Type": "application/json-patch+json"}
-        ) as response:
-            response.raise_for_status()
-            _logger.debug("[%s] response status: %s", str(request_uuid), response.status)
             response_json = await response.json()
             result = Netzvertrag.model_validate(response_json)
         return result

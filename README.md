@@ -25,12 +25,12 @@ pip install bssclient
 from yarl import URL
 from bssclient import bssclient, BssConfig
 
-tmds_config = BssConfig(
-    server_url=URL("https://my-tmds.xtk-test.org/"),
+bss_config = BssConfig(
+    server_url=URL("https://my-bss.xtk-test.org/"),
     usr="my-usr",
     pwd="my-pwd",
 )
-client = bssclient(tmds_config)
+client = bssclient(bss_config)
 netzvertrage = await client.get_netzvertraege_for_melo("DE1234567890123456789012345678901")
 ```
 

@@ -1,5 +1,5 @@
 [project]
-name = "tmdsclient"
+name = "bssclient"
 description = "Fully typed, async client library for Technical Master Data Service (TMDS)"
 license = { text = "MIT" }
 requires-python = ">=3.11"
@@ -25,7 +25,7 @@ dynamic = ["readme", "version"]
 
 [project.urls]
 Changelog = "https://github.com/Hochfrequenz/tmddsclient.py/releases"
-Homepage = "https://github.com/Hochfrequenz/tmdsclient.py"
+Homepage = "https://github.com/Hochfrequenz/bssclient.py"
 
 [tool.black]
 line-length = 120
@@ -61,7 +61,7 @@ fragments = [{ path = "README.md" }]
 source = "vcs"
 
 [tool.hatch.build.hooks.vcs]
-version-file = "src/_tmdsclient_version.py"
+version-file = "src/_bssclient_version.py"
 template = '''
 version = "{version}"
 '''

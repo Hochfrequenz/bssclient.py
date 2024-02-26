@@ -6,15 +6,14 @@ import uuid
 from typing import Callable, Optional
 
 from aiohttp import BasicAuth, ClientSession, ClientTimeout
-
-from tmdsclient.client.config import TmdsConfig
-from tmdsclient.models.netzvertrag import Netzvertrag, _ListOfNetzvertraege
-from tmdsclient.models.patches import build_json_patch_document
+from bssclient.client.config import TmdsConfig
+from bssclient.models.netzvertrag import Netzvertrag, _ListOfNetzvertraege
+from bssclient.models.patches import build_json_patch_document
 
 _logger = logging.getLogger(__name__)
 
 
-class TmdsClient:
+class bssclient:
     """
     an async wrapper around the TMDS API
     """

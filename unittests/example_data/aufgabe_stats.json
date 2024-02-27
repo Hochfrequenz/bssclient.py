@@ -1,0 +1,74 @@
+{
+	"stats": {
+		"Gpidentifizieren": {
+			"status": {
+				"Angelegt": 0,
+				"Beendet": 1996,
+				"Abgebrochen": 41,
+				"Offen": 446,
+				"Faellig": 0,
+				"InBearbeitung": 0,
+				"Ausstehend": 0,
+				"Geloest": 0,
+				"Wartend": 0,
+				"NichtErmittelbar": 0
+			}
+		},
+		"Ermittlungsauftrag": {
+			"status": {
+				"Angelegt": 0,
+				"Beendet": 2692,
+				"Abgebrochen": 6071,
+				"Offen": 2507,
+				"Faellig": 30,
+				"InBearbeitung": 182,
+				"Ausstehend": 0,
+				"Geloest": 26,
+				"Wartend": 1,
+				"NichtErmittelbar": 9
+			}
+		},
+		"Test": {
+			"status": {
+				"Angelegt": 1,
+				"Beendet": 0,
+				"Abgebrochen": 0,
+				"Offen": 0,
+				"Faellig": 12,
+				"InBearbeitung": 0,
+				"Ausstehend": 0,
+				"Geloest": 0,
+				"Wartend": 0,
+				"NichtErmittelbar": 0
+			}
+		},
+		"MarktnachrichtenFreigeben": {
+			"status": {
+				"Angelegt": 4,
+				"Beendet": 0,
+				"Abgebrochen": 0,
+				"Offen": 0,
+				"Faellig": 1473,
+				"InBearbeitung": 0,
+				"Ausstehend": 0,
+				"Geloest": 0,
+				"Wartend": 0,
+				"NichtErmittelbar": 0
+			}
+		},
+		"Unbekannt": {
+			"status": {
+				"Angelegt": 0,
+				"Beendet": 0,
+				"Abgebrochen": 0,
+				"Offen": 0,
+				"Faellig": 0,
+				"InBearbeitung": 0,
+				"Ausstehend": 0,
+				"Geloest": 0,
+				"Wartend": 0,
+				"NichtErmittelbar": 0
+			}
+		}
+	}
+}

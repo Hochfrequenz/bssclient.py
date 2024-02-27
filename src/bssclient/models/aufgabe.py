@@ -36,8 +36,8 @@ class AufgabeStats(BaseModel):
         ],
     ]
 
-    def get_sum(self, AufgabenTyp: _AufgabenTypen) -> int:
+    def get_sum(self, aufgaben_typ: _AufgabenTypen) -> int:
         """
         get the sum of all statuses for the given AufgabenTyp
         """
-        return sum(self.stats[AufgabenTyp]["status"].values())
+        return sum(self.stats[aufgaben_typ]["status"].values())

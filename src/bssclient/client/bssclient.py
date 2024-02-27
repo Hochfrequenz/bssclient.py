@@ -3,7 +3,7 @@
 import asyncio
 import logging
 import uuid
-from typing import Optional
+from typing import Awaitable, Optional
 
 from aiohttp import BasicAuth, ClientSession, ClientTimeout
 
@@ -72,6 +72,12 @@ class BssClient:
             _logger.debug("[%s] response status: %s", str(request_uuid), response.status)
             response_json = await response.json()
             _list_of_ermittlungsauftraege = _ListOfErmittlungsauftraege.model_validate(response_json)
+        _logger.debug(
+            "Downloaded %i Ermittlungsauftraege (limit %i, offset %i)",
+            len(_list_of_ermittlungsauftraege.root),
+            limit,
+            offset,
+        )
         return _list_of_ermittlungsauftraege.root
 
     async def get_aufgabe_stats(self) -> AufgabeStats:
@@ -87,4 +93,24 @@ class BssClient:
             _logger.debug("[%s] response status: %s", str(request_uuid), response.status)
             response_json = await response.json()
         result = AufgabeStats.model_validate(response_json)
+        return result
+
+    async def get_all_ermittlungsauftraege(self) -> list[Ermittlungsauftrag]:
+        """
+        downloads all ermittlungsauftrage in batches of 100
+        """
+        stats = await self.get_aufgabe_stats()
+        total_count = stats.get_sum("Ermittlungsauftrag")
+        package_size = 100
+        download_tasks: list[Awaitable[list[Ermittlungsauftrag]]] = []
+        for offset in range(0, total_count, package_size):
+            if offset + package_size > total_count:
+                limit = total_count - offset
+            else:
+                limit = package_size
+            batch = self.get_ermittlungsauftraege(limit=limit, offset=offset)
+            download_tasks.append(batch)
+        list_of_lists_of_io = await asyncio.gather(*download_tasks)
+        result = [item for sublist in list_of_lists_of_io for item in sublist]
+        _logger.info("Downloaded %i Ermittlungsautraege", len(result))
         return result

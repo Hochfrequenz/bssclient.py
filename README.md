@@ -31,7 +31,7 @@ bss_config = BssConfig(
     pwd="my-pwd",
 )
 client = bssclient(bss_config)
-netzvertrage = await client.get_netzvertraege_for_melo("DE1234567890123456789012345678901")
+ermittlungsauftraege = await client.get_all_ermittlungsauftraege()
 ```
 
 Even though we did not fully replicate the BSS data model,

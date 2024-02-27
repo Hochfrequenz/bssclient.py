@@ -101,7 +101,7 @@ class BssClient:
         downloads all ermittlungsauftrage in batches of 100
         """
         if package_size < 1:
-            raise ValueError("package_size must be at least 1 but was %i" % package_size)
+            raise ValueError(f"package_size must be at least 1 but was {package_size}")
         stats = await self.get_aufgabe_stats()
         total_count = stats.get_sum("Ermittlungsauftrag")
         download_tasks: list[Awaitable[list[Ermittlungsauftrag]]] = []

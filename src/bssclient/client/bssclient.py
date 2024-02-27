@@ -3,9 +3,10 @@
 import asyncio
 import logging
 import uuid
-from typing import Optional
+from typing import Awaitable, Optional
 
 from aiohttp import BasicAuth, ClientSession, ClientTimeout
+from more_itertools import chunked
 
 from bssclient.client.config import BssConfig
 from bssclient.models.aufgabe import AufgabeStats
@@ -72,6 +73,12 @@ class BssClient:
             _logger.debug("[%s] response status: %s", str(request_uuid), response.status)
             response_json = await response.json()
             _list_of_ermittlungsauftraege = _ListOfErmittlungsauftraege.model_validate(response_json)
+        _logger.debug(
+            "Downloaded %i Ermittlungsauftraege (limit %i, offset %i)",
+            len(_list_of_ermittlungsauftraege.root),
+            limit,
+            offset,
+        )
         return _list_of_ermittlungsauftraege.root
 
     async def get_aufgabe_stats(self) -> AufgabeStats:
@@ -87,4 +94,28 @@ class BssClient:
             _logger.debug("[%s] response status: %s", str(request_uuid), response.status)
             response_json = await response.json()
         result = AufgabeStats.model_validate(response_json)
+        return result
+
+    async def get_all_ermittlungsauftraege(self, package_size: int = 100) -> list[Ermittlungsauftrag]:
+        """
+        downloads all ermittlungsauftrage in batches of 100
+        """
+        if package_size < 1:
+            raise ValueError(f"package_size must be at least 1 but was {package_size}")
+        stats = await self.get_aufgabe_stats()
+        total_count = stats.get_sum("Ermittlungsauftrag")
+        download_tasks: list[Awaitable[list[Ermittlungsauftrag]]] = []
+        for offset in range(0, total_count, package_size):
+            if offset + package_size > total_count:
+                limit = total_count - offset
+            else:
+                limit = package_size
+            batch = self.get_ermittlungsauftraege(limit=limit, offset=offset)
+            download_tasks.append(batch)
+        result: list[Ermittlungsauftrag] = []
+        for download_tasks_chunk in chunked(download_tasks, 10):  # 10 is arbitrary at this point
+            _logger.debug("Downloading %i chunks of Ermittlungsautraege", len(download_tasks_chunk))
+            list_of_lists_of_io_from_chunk = await asyncio.gather(*download_tasks_chunk)
+            result.extend([item for sublist in list_of_lists_of_io_from_chunk for item in sublist])
+        _logger.info("Downloaded %i Ermittlungsautraege", len(result))
         return result

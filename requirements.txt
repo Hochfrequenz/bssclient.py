@@ -20,6 +20,8 @@ frozenlist==1.4.1
     #   aiosignal
 idna==3.6
     # via yarl
+more-itertools==10.2.0
+    # via bssclient (pyproject.toml)
 multidict==6.0.5
     # via
     #   aiohttp

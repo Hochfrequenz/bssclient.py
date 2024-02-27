@@ -18,7 +18,8 @@ classifiers = [
 ]
 dependencies = [
     "pydantic>=2.0.0",
-    "aiohttp[speedups]>=3.9.3"
+    "aiohttp[speedups]>=3.9.3",
+    "more-itertools"
 ] # add all the dependencies here
 dynamic = ["readme", "version"]
 

@@ -37,3 +37,4 @@ class TestErmittlungsauftraege:
             actual = await client.get_aufgabe_stats()
         assert isinstance(actual, AufgabeStats)
         assert actual.stats["Ermittlungsauftrag"]["status"]["Beendet"] == 2692
+        assert actual.get_sum("Ermittlungsauftrag") == 11518

@@ -6,6 +6,8 @@ from typing import Literal
 
 from pydantic import BaseModel
 
+_AufgabenTypen = Literal["Gpidentifizieren", "Ermittlungsauftrag", "Test", "MarktnachrichtenFreigeben", "Unbekannt"]
+
 
 class AufgabeStats(BaseModel):
     """
@@ -13,7 +15,7 @@ class AufgabeStats(BaseModel):
     """
 
     stats: dict[
-        Literal["Gpidentifizieren", "Ermittlungsauftrag", "Test", "MarktnachrichtenFreigeben", "Unbekannt"],
+        _AufgabenTypen,
         dict[
             Literal["status"],
             dict[
@@ -33,3 +35,9 @@ class AufgabeStats(BaseModel):
             ],
         ],
     ]
+
+    def get_sum(self, AufgabenTyp: _AufgabenTypen) -> int:
+        """
+        get the sum of all statuses for the given AufgabenTyp
+        """
+        return sum(self.stats[AufgabenTyp]["status"].values())

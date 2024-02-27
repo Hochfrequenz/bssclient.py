@@ -75,6 +75,9 @@ class BssClient:
         return _list_of_ermittlungsauftraege.root
 
     async def get_aufgabe_stats(self) -> AufgabeStats:
+        """
+        get statistics for all aufgaben types
+        """
         session = await self._get_session()
         request_url = self._config.server_url / "api" / "Aufgabe" / "stats"
         request_uuid = uuid.uuid4()

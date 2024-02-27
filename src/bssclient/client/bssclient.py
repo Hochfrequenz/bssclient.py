@@ -8,6 +8,7 @@ from typing import Optional
 from aiohttp import BasicAuth, ClientSession, ClientTimeout
 
 from bssclient.client.config import BssConfig
+from bssclient.models.aufgabe import AufgabeStats
 from bssclient.models.ermittlungsauftrag import Ermittlungsauftrag, _ListOfErmittlungsauftraege
 
 _logger = logging.getLogger(__name__)
@@ -72,3 +73,18 @@ class BssClient:
             response_json = await response.json()
             _list_of_ermittlungsauftraege = _ListOfErmittlungsauftraege.model_validate(response_json)
         return _list_of_ermittlungsauftraege.root
+
+    async def get_aufgabe_stats(self) -> AufgabeStats:
+        """
+        get statistics for all aufgaben types
+        """
+        session = await self._get_session()
+        request_url = self._config.server_url / "api" / "Aufgabe" / "stats"
+        request_uuid = uuid.uuid4()
+        _logger.debug("[%s] requesting %s", str(request_uuid), request_url)
+        async with session.get(request_url) as response:
+            response.raise_for_status()  # endpoint returns an empty list but no 404
+            _logger.debug("[%s] response status: %s", str(request_uuid), response.status)
+            response_json = await response.json()
+        result = AufgabeStats.model_validate(response_json)
+        return result

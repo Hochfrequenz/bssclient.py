@@ -25,6 +25,7 @@ class BssClient:
         self._auth = BasicAuth(login=self._config.usr, password=self._config.pwd)
         self._session_lock = asyncio.Lock()
         self._session: Optional[ClientSession] = None
+        _logger.info("Instantiated BssClient with server_url %s", str(self._config.server_url))
 
     async def _get_session(self) -> ClientSession:
         """

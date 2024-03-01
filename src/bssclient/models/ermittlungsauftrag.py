@@ -29,7 +29,7 @@ class Ermittlungsauftrag(BaseModel):
 
     model_config = ConfigDict(extra="allow", populate_by_name=True)
     id: UUID
-    flat_id: str = Field(alias="flatId")
+    flat_id: str | None = Field(alias="flatId", default=None)
     """
     the external ID of the respective Wohneinheit
     """

@@ -23,6 +23,6 @@ class Prozess(BaseModel):
     transaktionsgrund: str
     ausloeser_daten: str = Field(alias="ausloeserDaten")
     antwort_status: str = Field(alias="antwortStatus")
-    einheit: str
+    einheit: str | None = None
     messlokation: str
     zaehlernummer: str

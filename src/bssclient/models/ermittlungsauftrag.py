@@ -2,12 +2,17 @@
 models for Ermittlungsauftrag/Investigation Order
 """
 
+from datetime import datetime
 from typing import Literal
 from uuid import UUID
+from xml.etree.ElementTree import Element
 
+import pytz
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, RootModel
 
 from bssclient.models.prozess import Prozess
+
+_berlin = pytz.timezone("Europe/Berlin")
 
 
 class Notiz(BaseModel):
@@ -51,6 +56,22 @@ class Ermittlungsauftrag(BaseModel):
     notizen: list[Notiz]
     kategorie: Literal["Ermittlungsauftrag"]
     prozess: Prozess
+
+    def get_vertragsbeginn_from_boneycomb_or_topcom(self) -> AwareDatetime:
+        """
+        reads the vertragsbeginn from the boneycomb or topcom data (nested deep into the prozess)
+        """
+        ausloeser = self.prozess.deserialized_ausloeser
+        if isinstance(ausloeser, dict):
+            return datetime.fromisoformat(ausloeser["transaktionsdaten"]["vertragsbeginn"])
+        if isinstance(ausloeser, Element):
+            date_str = ausloeser.find("lieferbeginn").text
+            if date_str is None:
+                raise ValueError("lieferbeginn not found in topcom XML")
+            naive_date = datetime.strptime(date_str, "%Y-%m-%d")
+            aware_date = _berlin.localize(naive_date)  # everyone hates implicit timezones
+            return pytz.utc.normalize(aware_date)
+        raise NotImplementedError(f"ausloeser {ausloeser} is not implemented")
 
 
 class _ListOfErmittlungsauftraege(RootModel[list[Ermittlungsauftrag]]):

@@ -1,4 +1,5 @@
 import json
+from datetime import datetime, timezone
 from pathlib import Path
 from unittest.mock import AsyncMock, Mock
 
@@ -15,17 +16,31 @@ class TestErmittlungsauftraege:
 
     async def test_get_ermittlungsauftraege(self, bss_client_with_default_auth):
         ermittlungsauftraege_json_file = Path(__file__).parent / "example_data" / "list_of_1_ermittlungsauftraege.json"
-        with open(ermittlungsauftraege_json_file, "r", encoding="utf-8") as infile:
-            ermittlungsauftraege = json.load(infile)
+        ermittlungsauftraege_json_file2 = (
+            Path(__file__).parent / "example_data" / "list_of_1_ermittlungsauftrag_from_topcom.json"
+        )
+        with (
+            open(ermittlungsauftraege_json_file, "r", encoding="utf-8") as infile1,
+            open(ermittlungsauftraege_json_file2, "r", encoding="utf-8") as infile2,
+        ):
+            ermittlungsauftraege = json.load(infile1) + json.load(infile2)
         client, bss_config = bss_client_with_default_auth
         with aioresponses() as mocked_bss:
             mocked_get_url = (
-                f"{bss_config.server_url}api/Aufgabe/ermittlungsauftraege?includeDetails=true&limit=1&offset=0"
+                f"{bss_config.server_url}api/Aufgabe/ermittlungsauftraege?includeDetails=true&limit=2&offset=0"
             )
             mocked_bss.get(mocked_get_url, status=200, payload=ermittlungsauftraege)
-            actual = await client.get_ermittlungsauftraege(limit=1)
+            actual = await client.get_ermittlungsauftraege(limit=2)
         assert isinstance(actual, list)
+        assert len(actual) == 2
         assert all(isinstance(x, Ermittlungsauftrag) for x in actual)
+        assert isinstance(actual[0].prozess.deserialized_ausloeser, dict)
+        assert actual[0].get_vertragsbeginn_from_boneycomb_or_topcom() == datetime(
+            2023, 10, 31, 23, 0, 0, tzinfo=timezone.utc
+        )
+        assert actual[1].get_vertragsbeginn_from_boneycomb_or_topcom() == datetime(
+            2020, 4, 17, 22, 0, tzinfo=timezone.utc
+        )
 
     async def test_get_stats(self, bss_client_with_default_auth):
         stats_json_file = Path(__file__).parent / "example_data" / "aufgabe_stats.json"

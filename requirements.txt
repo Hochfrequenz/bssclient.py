@@ -30,6 +30,8 @@ pydantic==2.6.2
     # via bssclient (pyproject.toml)
 pydantic-core==2.16.3
     # via pydantic
+pytz==2024.1
+    # via bssclient (pyproject.toml)
 typing-extensions==4.10.0
     # via
     #   pydantic

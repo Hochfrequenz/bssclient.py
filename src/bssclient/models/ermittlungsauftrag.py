@@ -18,7 +18,7 @@ class Notiz(BaseModel):
     autor: str
     zeitpunkt: AwareDatetime | None = None
     inhalt: str
-    timestamp: AwareDatetime
+    timestamp: AwareDatetime | None = None
     guid: UUID
 
 
@@ -33,15 +33,15 @@ class Ermittlungsauftrag(BaseModel):
     """
     the external ID of the respective Wohneinheit
     """
-    marktloaktion_id: str = Field(alias="marktlokationId")
+    marktlokation_id: str | None = Field(alias="marktlokationId", default=None)
     """
     malo id
     """
-    messlokation_id: str = Field(alias="messlokationId")
+    messlokation_id: str | None = Field(alias="messlokationId", default=None)
     """
     melo id
     """
-    zaehlernummer: str = Field(alias="zaehlernummer")
+    zaehlernummer: str | None = Field(alias="zaehlernummer", default=None)
     vertrag_id: UUID = Field(alias="vertragId")
     """
     ID of the respective netzvertrag

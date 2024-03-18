@@ -48,6 +48,7 @@ class TestErmittlungsauftraege:
             ermittlungsauftraege = json.load(infile1)
         client, bss_config = bss_client_with_default_auth
         with aioresponses() as mocked_bss:
+            # pylint: disable=line-too-long
             mocked_get_url = f"{bss_config.server_url}api/Aufgabe/ermittlungsauftraege?marktlokationid=52671494807&includeDetails=true"
             mocked_bss.get(mocked_get_url, status=200, payload=ermittlungsauftraege)
             actual = await client.get_ermittlungsauftraege_by_malo(malo_id="52671494807")

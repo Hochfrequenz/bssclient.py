@@ -42,6 +42,20 @@ class TestErmittlungsauftraege:
             2020, 4, 17, 22, 0, tzinfo=timezone.utc
         )
 
+    async def test_get_ermittlungsauftraege_by_malo(self, bss_client_with_default_auth):
+        ermittlungsauftraege_json_file = Path(__file__).parent / "example_data" / "list_of_1_ermittlungsauftraege.json"
+        with (open(ermittlungsauftraege_json_file, "r", encoding="utf-8") as infile1,):
+            ermittlungsauftraege = json.load(infile1)
+        client, bss_config = bss_client_with_default_auth
+        with aioresponses() as mocked_bss:
+            # pylint: disable=line-too-long
+            mocked_get_url = f"{bss_config.server_url}api/Aufgabe/ermittlungsauftraege?marktlokationid=52671494807&includeDetails=true"
+            mocked_bss.get(mocked_get_url, status=200, payload=ermittlungsauftraege)
+            actual = await client.get_ermittlungsauftraege_by_malo(malo_id="52671494807")
+        assert isinstance(actual, list)
+        assert len(actual) == 1
+        assert all(isinstance(x, Ermittlungsauftrag) for x in actual)
+
     async def test_get_stats(self, bss_client_with_default_auth):
         stats_json_file = Path(__file__).parent / "example_data" / "aufgabe_stats.json"
         with open(stats_json_file, "r", encoding="utf-8") as infile:

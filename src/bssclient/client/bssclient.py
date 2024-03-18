@@ -102,6 +102,33 @@ class BssClient:
         )
         return _list_of_ermittlungsauftraege.root
 
+    async def get_ermittlungsauftraege_by_malo(self, malo_id: str) -> list[Ermittlungsauftrag]:
+        """
+        find ermittlungsauftraege by their marktlokations-id
+        """
+        if malo_id is None or not isinstance(malo_id, str) or not malo_id.strip():
+            raise ValueError(f"malo_id must not be empty but was '{malo_id}'")
+        session = await self._get_session()
+        # see https://basicsupply.xtk-dev.de/swagger/index.html#operations-Aufgabe-get_api_Aufgabe_ermittlungsauftraege
+        request_url = (
+            self._config.server_url
+            / "api"
+            / "Aufgabe"
+            / "ermittlungsauftraege"
+            % {"marktlokationid": malo_id, "includeDetails": "true"}
+        )
+        request_uuid = uuid.uuid4()
+        _logger.debug("[%s] requesting %s", str(request_uuid), request_url)
+        async with session.get(request_url) as response:
+            response.raise_for_status()  # endpoint returns an empty list but no 404
+            _logger.debug("[%s] response status: %s", str(request_uuid), response.status)
+            response_json = await response.json()
+            _list_of_ermittlungsauftraege = _ListOfErmittlungsauftraege.model_validate(response_json)
+        _logger.debug(
+            "Downloaded %i Ermittlungsauftraege for MaLo '%s'", len(_list_of_ermittlungsauftraege.root), malo_id
+        )
+        return _list_of_ermittlungsauftraege.root
+
     async def get_aufgabe_stats(self) -> AufgabeStats:
         """
         get statistics for all aufgaben types

@@ -163,7 +163,7 @@ class BasicAuthBssClient(BssClient):
         if not isinstance(config, BasicAuthBssConfig):
             raise ValueError("You must provide a valid config")
         super().__init__(config)
-        self._auth = BasicAuth(login=self._config.usr, password=self._config.pwd)
+        self._auth = BasicAuth(login=config.usr, password=config.pwd)
 
     async def _get_session(self) -> ClientSession:
         """
@@ -196,7 +196,7 @@ class OAuthBssClient(BssClient, _OAuthHttpClient):
             base_url=config.server_url,
             oauth_client_id=config.client_id,
             oauth_client_secret=config.client_secret,
-            oauth_token_url=config.token_url,
+            oauth_token_url=URL(str(config.token_url)),
         )
         self._oauth_config = config
         self._bearer_token: str | None = None

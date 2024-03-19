@@ -35,7 +35,7 @@ class BssConfig(BaseModel):
 
 class BasicAuthBssConfig(BssConfig):
     """
-    configuation of bss with basic auth
+    configuration of bss with basic auth
     """
 
     usr: str
@@ -61,7 +61,7 @@ class BasicAuthBssConfig(BssConfig):
 
 class OAuthBssConfig(BssConfig):
     """
-    configuation of bss with oauth
+    configuration of bss with oauth
     """
 
     client_id: str

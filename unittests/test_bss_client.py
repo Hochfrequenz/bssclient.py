@@ -1,7 +1,8 @@
 import pytest
 from yarl import URL
 
-from bssclient import BssClient, BssConfig
+from bssclient.client.bssclient import BasicAuthBssClient
+from bssclient.client.config import BasicAuthBssConfig
 
 
 @pytest.mark.parametrize(
@@ -17,7 +18,7 @@ from bssclient import BssClient, BssConfig
     ],
 )
 def test_get_tld(actual_url: URL, expected_tld: URL):
-    config = BssConfig(server_url=actual_url, usr="user", pwd="password")
-    client = BssClient(config)
+    config = BasicAuthBssConfig(server_url=actual_url, usr="user", pwd="password")
+    client = BasicAuthBssClient(config)
     actual = client.get_top_level_domain()
     assert actual == expected_tld

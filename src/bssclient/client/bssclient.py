@@ -3,30 +3,34 @@
 import asyncio
 import logging
 import uuid
+from abc import ABC
 from typing import Awaitable, Optional
 
 from aiohttp import BasicAuth, ClientSession, ClientTimeout
 from more_itertools import chunked
 from yarl import URL
 
-from bssclient.client.config import BssConfig
+from bssclient.client.config import BasicAuthBssConfig, BssConfig, OAuthBssConfig
+from bssclient.client.oauth import _OAuthHttpClient
 from bssclient.models.aufgabe import AufgabeStats
 from bssclient.models.ermittlungsauftrag import Ermittlungsauftrag, _ListOfErmittlungsauftraege
 
 _logger = logging.getLogger(__name__)
 
 
-class BssClient:
+class BssClient(ABC):
     """
     an async wrapper around the BSS API
     """
 
     def __init__(self, config: BssConfig):
         self._config = config
-        self._auth = BasicAuth(login=self._config.usr, password=self._config.pwd)
         self._session_lock = asyncio.Lock()
         self._session: Optional[ClientSession] = None
         _logger.info("Instantiated BssClient with server_url %s", str(self._config.server_url))
+
+    async def _get_session(self):
+        raise NotImplementedError("The inheriting class has to implement this with its respective authentication")
 
     def get_top_level_domain(self) -> URL | None:
         """
@@ -46,24 +50,6 @@ class BssClient:
         else:
             tld = ".".join(domain_parts[-2:])
         return URL(self._config.server_url.scheme + "://" + tld)
-
-    async def _get_session(self) -> ClientSession:
-        """
-        returns a client session (that may be reused or newly created)
-        re-using the same (threadsafe) session will be faster than re-creating a new session for every request.
-        see https://docs.aiohttp.org/en/stable/http_request_lifecycle.html#how-to-use-the-clientsession
-        """
-        async with self._session_lock:
-            if self._session is None or self._session.closed:
-                _logger.info("creating new session")
-                self._session = ClientSession(
-                    auth=self._auth,
-                    timeout=ClientTimeout(60),
-                    raise_for_status=True,
-                )
-            else:
-                _logger.log(5, "reusing aiohttp session")  # log level 5 is half as "loud" logging.DEBUG
-            return self._session
 
     async def close_session(self):
         """
@@ -167,3 +153,72 @@ class BssClient:
             result.extend([item for sublist in list_of_lists_of_io_from_chunk for item in sublist])
         _logger.info("Downloaded %i Ermittlungsautraege", len(result))
         return result
+
+
+class BasicAuthBssClient(BssClient):
+    """BSS client with basic auth"""
+
+    def __init__(self, config: BasicAuthBssConfig):
+        """instantiate by providing a valid config"""
+        if not isinstance(config, BasicAuthBssConfig):
+            raise ValueError("You must provide a valid config")
+        super().__init__(config)
+        self._auth = BasicAuth(login=config.usr, password=config.pwd)
+
+    async def _get_session(self) -> ClientSession:
+        """
+        returns a client session (that may be reused or newly created)
+        re-using the same (threadsafe) session will be faster than re-creating a new session for every request.
+        see https://docs.aiohttp.org/en/stable/http_request_lifecycle.html#how-to-use-the-clientsession
+        """
+        async with self._session_lock:
+            if self._session is None or self._session.closed:
+                _logger.info("creating new session")
+                self._session = ClientSession(
+                    auth=self._auth,
+                    timeout=ClientTimeout(60),
+                    raise_for_status=True,
+                )
+            else:
+                _logger.log(5, "reusing aiohttp session")  # log level 5 is half as "loud" logging.DEBUG
+            return self._session
+
+
+class OAuthBssClient(BssClient, _OAuthHttpClient):
+    """BSS client with OAuth"""
+
+    def __init__(self, config: OAuthBssConfig):
+        if not isinstance(config, OAuthBssConfig):
+            raise ValueError("You must provide a valid config")
+        super().__init__(config)
+        _OAuthHttpClient.__init__(
+            self,
+            base_url=config.server_url,
+            oauth_client_id=config.client_id,
+            oauth_client_secret=config.client_secret,
+            oauth_token_url=str(config.token_url),
+        )
+        self._oauth_config = config
+        self._bearer_token: str | None = None
+
+    async def _get_session(self) -> ClientSession:
+        """
+        returns a client session (that may be reused or newly created)
+        re-using the same (threadsafe) session will be faster than re-creating a new session for every request.
+        see https://docs.aiohttp.org/en/stable/http_request_lifecycle.html#how-to-use-the-clientsession
+        """
+        async with self._session_lock:
+            if self._bearer_token is None:
+                self._bearer_token = await self._get_oauth_token()
+            elif not self._token_is_valid(self._bearer_token):
+                await self.close_session()
+            if self._session is None or self._session.closed:
+                _logger.info("creating new session")
+                self._session = ClientSession(
+                    timeout=ClientTimeout(60),
+                    raise_for_status=True,
+                    headers={"Authorization": f"Bearer {self._bearer_token}"},
+                )
+            else:
+                _logger.log(5, "reusing aiohttp session")  # log level 5 is half as "loud" logging.DEBUG
+            return self._session

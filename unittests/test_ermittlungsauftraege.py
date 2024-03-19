@@ -3,6 +3,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from unittest.mock import AsyncMock, Mock
 
+import httpx
+import pytest
 from aioresponses import aioresponses
 
 from bssclient.models.aufgabe import AufgabeStats
@@ -14,7 +16,7 @@ class TestErmittlungsauftraege:
     A class with pytest unit tests.
     """
 
-    async def test_get_ermittlungsauftraege(self, bss_client_with_default_auth):
+    async def test_get_ermittlungsauftraege(self, bss_client_with_basic_auth):
         ermittlungsauftraege_json_file = Path(__file__).parent / "example_data" / "list_of_1_ermittlungsauftraege.json"
         ermittlungsauftraege_json_file2 = (
             Path(__file__).parent / "example_data" / "list_of_1_ermittlungsauftrag_from_topcom.json"
@@ -24,7 +26,7 @@ class TestErmittlungsauftraege:
             open(ermittlungsauftraege_json_file2, "r", encoding="utf-8") as infile2,
         ):
             ermittlungsauftraege = json.load(infile1) + json.load(infile2)
-        client, bss_config = bss_client_with_default_auth
+        client, bss_config = bss_client_with_basic_auth
         with aioresponses() as mocked_bss:
             mocked_get_url = (
                 f"{bss_config.server_url}api/Aufgabe/ermittlungsauftraege?includeDetails=true&limit=2&offset=0"
@@ -42,11 +44,11 @@ class TestErmittlungsauftraege:
             2020, 4, 17, 22, 0, tzinfo=timezone.utc
         )
 
-    async def test_get_ermittlungsauftraege_by_malo(self, bss_client_with_default_auth):
+    async def test_get_ermittlungsauftraege_by_malo(self, bss_client_with_basic_auth):
         ermittlungsauftraege_json_file = Path(__file__).parent / "example_data" / "list_of_1_ermittlungsauftraege.json"
         with (open(ermittlungsauftraege_json_file, "r", encoding="utf-8") as infile1,):
             ermittlungsauftraege = json.load(infile1)
-        client, bss_config = bss_client_with_default_auth
+        client, bss_config = bss_client_with_basic_auth
         with aioresponses() as mocked_bss:
             # pylint: disable=line-too-long
             mocked_get_url = f"{bss_config.server_url}api/Aufgabe/ermittlungsauftraege?marktlokationid=52671494807&includeDetails=true"
@@ -56,11 +58,11 @@ class TestErmittlungsauftraege:
         assert len(actual) == 1
         assert all(isinstance(x, Ermittlungsauftrag) for x in actual)
 
-    async def test_get_stats(self, bss_client_with_default_auth):
+    async def test_get_stats(self, bss_client_with_basic_auth):
         stats_json_file = Path(__file__).parent / "example_data" / "aufgabe_stats.json"
         with open(stats_json_file, "r", encoding="utf-8") as infile:
             stats = json.load(infile)
-        client, bss_config = bss_client_with_default_auth
+        client, bss_config = bss_client_with_basic_auth
         with aioresponses() as mocked_bss:
             mocked_get_url = f"{bss_config.server_url}api/Aufgabe/stats"
             mocked_bss.get(mocked_get_url, status=200, payload=stats)
@@ -69,11 +71,11 @@ class TestErmittlungsauftraege:
         assert actual.stats["Ermittlungsauftrag"]["status"]["Beendet"] == 2692
         assert actual.get_sum("Ermittlungsauftrag") == 11518
 
-    async def test_get_all_ermittlungsauftraege(self, bss_client_with_default_auth):
+    async def test_get_all_ermittlungsauftraege(self, bss_client_with_basic_auth):
         ermittlungsauftraege_json_file = Path(__file__).parent / "example_data" / "list_of_1_ermittlungsauftraege.json"
         with open(ermittlungsauftraege_json_file, "r", encoding="utf-8") as infile:
             ermittlungsauftraege = json.load(infile)
-        client, bss_config = bss_client_with_default_auth
+        client, bss_config = bss_client_with_basic_auth
         stats_mock = Mock(AufgabeStats)
 
         def return_345(t):
@@ -104,3 +106,19 @@ class TestErmittlungsauftraege:
         assert isinstance(actual, list)
         assert len(actual) == 345
         assert all(isinstance(x, Ermittlungsauftrag) for x in actual)
+
+    async def test_get_stats_with_oauth(self, bss_client_with_oauth):
+        client, bss_config = bss_client_with_oauth
+        stats_json_file = Path(__file__).parent / "example_data" / "aufgabe_stats.json"
+        with open(stats_json_file, "r", encoding="utf-8") as infile:
+            stats = json.load(infile)
+        with aioresponses() as mocked_bss:
+            mocked_get_url = f"{bss_config.server_url}api/Aufgabe/stats"
+            mocked_bss.get(mocked_get_url, status=200, payload=stats)
+            try:
+                actual = await client.get_aufgabe_stats()
+            except httpx.ConnectError:
+                pytest.skip("Someone should add good tests for the oauth part, but it's not me and not today")
+                # https://github.com/Hochfrequenz/bssclient.py/issues/25
+        assert isinstance(actual, AufgabeStats)
+        assert actual.stats["Ermittlungsauftrag"]["status"]["Beendet"] == 2692

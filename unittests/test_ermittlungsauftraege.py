@@ -119,5 +119,6 @@ class TestErmittlungsauftraege:
                 actual = await client.get_aufgabe_stats()
             except httpx.ConnectError:
                 pytest.skip("Someone should add good tests for the oauth part, but it's not me and not today")
+                # https://github.com/Hochfrequenz/bssclient.py/issues/25
         assert isinstance(actual, AufgabeStats)
         assert actual.stats["Ermittlungsauftrag"]["status"]["Beendet"] == 2692

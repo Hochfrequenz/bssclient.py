@@ -20,7 +20,9 @@ dependencies = [
     "pydantic>=2.0.0",
     "aiohttp[speedups]>=3.9.3",
     "more-itertools",
-    "pytz"
+    "pytz",
+    "pyjwt",
+    "aioauth_client",
 ] # add all the dependencies here
 dynamic = ["readme", "version"]
 

@@ -74,12 +74,7 @@ class _OAuthHttpClient(_ValidateTokenMixin, ABC):  # pylint:disable=too-few-publ
     async def _get_new_token(self) -> str:
         """get a new JWT token from the oauth server"""
         _logger.debug("Retrieving a new token")
-        token, _ = await self._oauth2client.get_access_token(
-            "code",
-            grant_type="client_credentials",
-            audience="https://transformer.bee",
-            # without the audience, you'll get an HTTP 403
-        )
+        token, _ = await self._oauth2client.get_access_token("code", grant_type="client_credentials")
         return token
 
     async def _get_oauth_token(self) -> str:

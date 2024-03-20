@@ -2,7 +2,7 @@ import pytest
 from yarl import URL
 
 from bssclient.client.bssclient import BasicAuthBssClient
-from bssclient.client.config import BasicAuthBssConfig
+from bssclient.client.config import BasicAuthBssConfig, OAuthBssConfig
 
 
 @pytest.mark.parametrize(
@@ -22,3 +22,8 @@ def test_get_tld(actual_url: URL, expected_tld: URL):
     client = BasicAuthBssClient(config)
     actual = client.get_top_level_domain()
     assert actual == expected_tld
+
+
+def test_oauth_config():
+    with pytest.raises(ValueError):
+        OAuthBssConfig(server_url=URL("https://bss.example.com"), bearer_token="something-which-is-definittly no token")

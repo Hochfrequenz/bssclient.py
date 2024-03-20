@@ -11,7 +11,7 @@ from more_itertools import chunked
 from yarl import URL
 
 from bssclient.client.config import BasicAuthBssConfig, BssConfig, OAuthBssConfig
-from bssclient.client.oauth import _OAuthHttpClient
+from bssclient.client.oauth import _OAuthHttpClient, token_is_valid
 from bssclient.models.aufgabe import AufgabeStats
 from bssclient.models.ermittlungsauftrag import Ermittlungsauftrag, _ListOfErmittlungsauftraege
 
@@ -210,7 +210,7 @@ class OAuthBssClient(BssClient, _OAuthHttpClient):
         async with self._session_lock:
             if self._bearer_token is None:
                 self._bearer_token = await self._get_oauth_token()
-            elif not self._token_is_valid(self._bearer_token):
+            elif not token_is_valid(self._bearer_token):
                 await self.close_session()
             if self._session is None or self._session.closed:
                 _logger.info("creating new session")

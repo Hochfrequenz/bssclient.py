@@ -5,6 +5,8 @@ contains a class with which the BSS client is instantiated/configured
 from pydantic import BaseModel, ConfigDict, HttpUrl, field_validator, model_validator
 from yarl import URL
 
+from .oauth import token_is_valid
+
 
 class BssConfig(BaseModel):
     """
@@ -102,3 +104,14 @@ class OAuthBssConfig(BssConfig):
                 # pylint:disable=line-too-long
                 "You must provide either client id and secret or a bearer token, but not None of both"
             )
+
+    @field_validator("bearer_token")
+    def validate_bearer_token(cls, value):
+        """
+        check that the value is a string
+        """
+        if value is not None and len(value.strip()) > 0:
+            _token_is_valid = token_is_valid(value)
+            if not _token_is_valid:
+                raise ValueError("Invalid bearer token")
+        return value

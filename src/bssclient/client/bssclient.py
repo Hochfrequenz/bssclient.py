@@ -210,7 +210,7 @@ class OAuthBssClient(BssClient, _OAuthHttpClient):
         async with self._session_lock:
             if self._bearer_token is None:
                 self._bearer_token = await self._get_oauth_token()
-            elif not self._token_is_valid(self._bearer_token):
+            elif not _token_is_valid(self._bearer_token):
                 await self.close_session()
             if self._session is None or self._session.closed:
                 _logger.info("creating new session")

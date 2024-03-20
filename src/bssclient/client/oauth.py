@@ -15,6 +15,27 @@ from yarl import URL
 _logger = logging.getLogger(__name__)
 
 
+def token_is_valid(token) -> bool:
+    """
+    returns true iff the token expiration date is far enough in the future. By "enough" I mean:
+    more than 1 minute (because the clients' request using the token shouldn't take longer than that)
+    """
+    try:
+        decoded_token = jwt.decode(token, algorithms=["HS256"], options={"verify_signature": False})
+        expiration_timestamp = decoded_token.get("exp")
+        expiration_datetime = datetime.fromtimestamp(expiration_timestamp)
+        _logger.debug("Token is valid until %s", expiration_datetime.isoformat())
+        current_datetime = datetime.utcnow()
+        token_is_valid_one_minute_into_the_future = expiration_datetime > current_datetime + timedelta(minutes=1)
+        return token_is_valid_one_minute_into_the_future
+    except jwt.ExpiredSignatureError:
+        _logger.info("The token is expired", exc_info=True)
+        return False
+    except jwt.InvalidTokenError:
+        _logger.info("The token is invalid", exc_info=True)
+        return False
+
+
 class _ValidateTokenMixin:  # pylint:disable=too-few-public-methods
     """
     Mixin for classes which need to validate tokens
@@ -22,26 +43,6 @@ class _ValidateTokenMixin:  # pylint:disable=too-few-public-methods
 
     def __init__(self):
         self._session_lock = asyncio.Lock()
-
-    def _token_is_valid(self, token) -> bool:
-        """
-        returns true iff the token expiration date is far enough in the future. By "enough" I mean:
-        more than 1 minute (because the clients' request using the token shouldn't take longer than that)
-        """
-        try:
-            decoded_token = jwt.decode(token, algorithms=["HS256"], options={"verify_signature": False})
-            expiration_timestamp = decoded_token.get("exp")
-            expiration_datetime = datetime.fromtimestamp(expiration_timestamp)
-            _logger.debug("Token is valid until %s", expiration_datetime.isoformat())
-            current_datetime = datetime.utcnow()
-            token_is_valid_one_minute_into_the_future = expiration_datetime > current_datetime + timedelta(minutes=1)
-            return token_is_valid_one_minute_into_the_future
-        except jwt.ExpiredSignatureError:
-            _logger.info("The token is expired", exc_info=True)
-            return False
-        except jwt.InvalidTokenError:
-            _logger.info("The token is invalid", exc_info=True)
-            return False
 
 
 class _OAuthHttpClient(_ValidateTokenMixin, ABC):  # pylint:disable=too-few-public-methods
@@ -86,7 +87,7 @@ class _OAuthHttpClient(_ValidateTokenMixin, ABC):  # pylint:disable=too-few-publ
             if self._token is None:
                 _logger.info("Initially retrieving a new token")
                 self._token = await self._get_new_token()
-            elif not self._token_is_valid(self._token):
+            elif not token_is_valid(self._token):
                 _logger.info("Token is not valid anymore, retrieving a new token")
                 self._token = await self._get_new_token()
             else:

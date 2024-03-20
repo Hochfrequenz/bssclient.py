@@ -100,5 +100,5 @@ class OAuthBssConfig(BssConfig):
         if not token_is_present and not client_id_and_secret_are_present:
             raise ValueError(
                 # pylint:disable=line-too-long
-                f"You must provide either cliend id and secret or a bearer token, but not None of both"
+                "You must provide either client id and secret or a bearer token, but not None of both"
             )

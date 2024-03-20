@@ -199,7 +199,7 @@ class OAuthBssClient(BssClient, _OAuthHttpClient):
             oauth_token_url=str(config.token_url),
         )
         self._oauth_config = config
-        self._bearer_token: str | None = None
+        self._bearer_token: str | None = config.bearer_token if config.bearer_token else None
 
     async def _get_session(self) -> ClientSession:
         """

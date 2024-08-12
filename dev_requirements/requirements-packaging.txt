@@ -5,8 +5,8 @@
 #    pip-compile dev_requirements/requirements-packaging.in
 #
 build==1.2.1
-    # via -r dev_requirements/requirements-packaging.in
-certifi==2024.2.2
+    # via -r requirements-packaging.in
+certifi==2024.7.4
     # via requests
 cffi==1.16.0
     # via cryptography
@@ -69,7 +69,7 @@ tomli==2.0.1
     #   build
     #   pyproject-hooks
 twine==5.0.0
-    # via -r dev_requirements/requirements-packaging.in
+    # via -r requirements-packaging.in
 urllib3==2.2.1
     # via
     #   requests

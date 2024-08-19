@@ -6,7 +6,7 @@
 #
 annotated-types==0.6.0
     # via pydantic
-astroid==3.1.0
+astroid==3.2.4
     # via pylint
 dill==0.3.7
     # via pylint
@@ -20,7 +20,7 @@ pydantic==2.6.4
     # via pylint-pydantic
 pydantic-core==2.16.3
     # via pydantic
-pylint==3.1.0
+pylint==3.2.6
     # via
     #   -r dev_requirements/requirements-linting.in
     #   pylint-plugin-utils

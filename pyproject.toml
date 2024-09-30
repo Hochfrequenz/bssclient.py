@@ -39,7 +39,7 @@ linting = [
     "pylint-pydantic==0.3.2"
 ]
 packaging = [
-    "build==1.2.1",
+    "build==1.2.2",
     "twine==5.1.1"
 ]
 spellcheck = [

@@ -39,7 +39,7 @@ idna==3.10
     #   yarl
 more-itertools==10.2.0
     # via bssclient (pyproject.toml)
-multidict==6.0.5
+multidict==6.1.0
     # via
     #   aiohttp
     #   yarl

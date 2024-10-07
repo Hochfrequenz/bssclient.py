@@ -43,7 +43,7 @@ packaging = [
     "twine==5.1.1"
 ]
 spellcheck = [
-    "codespell==2.2.6"
+    "codespell==2.3.0"
 ]
 tests = [
     "aioresponses==0.7.6",

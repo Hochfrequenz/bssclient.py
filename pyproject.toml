@@ -35,7 +35,7 @@ formatting = [
     "isort==5.13.2"
 ]
 linting = [
-    "pylint==3.2.6",
+    "pylint==3.3.1",
     "pylint-pydantic==0.3.2"
 ]
 packaging = [

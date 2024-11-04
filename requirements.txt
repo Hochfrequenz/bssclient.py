@@ -43,7 +43,7 @@ multidict==6.1.0
     # via
     #   aiohttp
     #   yarl
-pydantic==2.6.4
+pydantic==2.9.2
     # via bssclient (pyproject.toml)
 pydantic-core==2.16.3
     # via pydantic

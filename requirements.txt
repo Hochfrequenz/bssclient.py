@@ -4,7 +4,7 @@
 #
 #    pip-compile pyproject.toml
 #
-aioauth-client==0.28.1
+aioauth-client==0.29.0
     # via bssclient (pyproject.toml)
 aiohttp[speedups]==3.10.10
     # via bssclient (pyproject.toml)

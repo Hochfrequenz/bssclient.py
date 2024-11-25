@@ -46,7 +46,7 @@ spellcheck = [
     "codespell==2.3.0"
 ]
 tests = [
-    "aioresponses==0.7.6",
+    "aioresponses==0.7.7",
     "pytest==8.3.3",
     "pytest-asyncio==0.24.0"
 ]

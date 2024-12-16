@@ -18,7 +18,7 @@ attrs==24.2.0
     # via aiohttp
 brotli==1.1.0
     # via aiohttp
-certifi==2024.8.30
+certifi==2024.12.14
     # via
     #   httpcore
     #   httpx

@@ -1,7 +1,7 @@
 from typing import AsyncGenerator
 
 import pytest
-from pydantic_core import Url
+from pydantic import HttpUrl
 from yarl import URL
 
 from bssclient import BssClient, BssConfig
@@ -37,7 +37,7 @@ async def bss_client_with_oauth() -> AsyncGenerator[tuple[BssClient, BssConfig],
         server_url=URL("https://basicsupply.invalid.de/"),
         client_id="my-client-id",
         client_secret="my-client-secret",
-        token_url=Url("https://validate-my-token.inv"),
+        token_url=HttpUrl("https://validate-my-token.inv"),
     )
     client = OAuthBssClient(bss_config)
     yield client, bss_config

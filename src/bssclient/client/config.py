@@ -1,6 +1,7 @@
 """
 contains a class with which the BSS client is instantiated/configured
 """
+from typing import Self
 
 from pydantic import BaseModel, ConfigDict, HttpUrl, field_validator, model_validator
 from yarl import URL
@@ -87,23 +88,24 @@ class OAuthBssConfig(BssConfig):
     This is useful when you have ways to get a token but not a client id and secret.
     """
 
-    @model_validator(mode="after")
-    def check_secret_or_token_is_present(cls, values):  # pylint:disable=no-self-argument
+    @model_validator(mode="after")  # type:ignore[misc, no-untyped-def]
+    def check_secret_or_token_is_present(self) -> Self:
         """
         Ensures that either (id+secret) or a bare token are present
         """
-        token_is_present = values.bearer_token is not None and values.bearer_token.strip()
+        token_is_present = self.bearer_token is not None and self.bearer_token.strip()
         client_id_and_secret_are_present = (
-            values.client_id is not None
-            and values.client_id.strip()
-            and values.client_secret is not None
-            and values.client_secret.strip()
+                self.client_id is not None
+                and self.client_id.strip()
+                and self.client_secret is not None
+                and self.client_secret.strip()
         )
         if not token_is_present and not client_id_and_secret_are_present:
             raise ValueError(
                 # pylint:disable=line-too-long
                 "You must provide either client id and secret or a bearer token, but not None of both"
             )
+        return self
 
     @field_validator("bearer_token")
     def validate_bearer_token(cls, value):

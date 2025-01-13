@@ -2,7 +2,6 @@ from typing import AsyncGenerator
 
 import pytest
 from pydantic import HttpUrl
-from pydantic_core import Url
 from yarl import URL
 
 from bssclient import BssClient, BssConfig

@@ -4,9 +4,9 @@ import asyncio
 import logging
 import uuid
 from abc import ABC
-from typing import Awaitable, Optional
+from typing import Awaitable, Literal, Optional, TypeAlias
 
-from aiohttp import BasicAuth, ClientSession, ClientTimeout
+from aiohttp import BasicAuth, ClientResponseError, ClientSession, ClientTimeout
 from more_itertools import chunked
 from yarl import URL
 
@@ -16,6 +16,8 @@ from bssclient.models.aufgabe import AufgabeStats
 from bssclient.models.ermittlungsauftrag import Ermittlungsauftrag, _ListOfErmittlungsauftraege
 
 _logger = logging.getLogger(__name__)
+
+DomainModelType: TypeAlias = Literal["Prozess", "Aufgabe", "Zeitlimit"]
 
 
 class BssClient(ABC):
@@ -153,6 +155,29 @@ class BssClient(ABC):
             result.extend([item for sublist in list_of_lists_of_io_from_chunk for item in sublist])
         _logger.info("Downloaded %i Ermittlungsautraege", len(result))
         return result
+
+    async def replay_event(self, model_type: DomainModelType, model_id: uuid.UUID, event_number: int) -> bool:
+        """calls the re-apply endpoint"""
+        session = await self._get_session()
+        request_url = (
+            self._config.server_url
+            / "api"
+            / "Event"
+            / "replay"
+            / model_type
+            / str(model_id)
+            / str(event_number)
+            / "false"  # is temporal
+        )
+        request_uuid = uuid.uuid4()
+        _logger.debug("[%s] requesting %s", str(request_uuid), request_url)
+        try:
+            async with session.patch(request_url) as response:
+                _logger.debug("[%s] response status: %s", str(request_uuid), response.status)
+        except ClientResponseError as cre:
+            _logger.debug("[%s] response status: %s", str(request_uuid), cre.status)
+            return False
+        return response.status == 200
 
 
 class BasicAuthBssClient(BssClient):

@@ -2,7 +2,6 @@ import json
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
-from pickle import FALSE
 from unittest.mock import AsyncMock, Mock
 
 import httpx

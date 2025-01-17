@@ -174,10 +174,10 @@ class BssClient(ABC):
         try:
             async with session.patch(request_url) as response:
                 _logger.debug("[%s] response status: %s", str(request_uuid), response.status)
+                return response.status == 200
         except ClientResponseError as cre:
             _logger.debug("[%s] response status: %s", str(request_uuid), cre.status)
             return False
-        return response.status == 200
 
 
 class BasicAuthBssClient(BssClient):

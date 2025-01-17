@@ -1,4 +1,5 @@
 import json
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from unittest.mock import AsyncMock, Mock
@@ -122,3 +123,20 @@ class TestErmittlungsauftraege:
                 # https://github.com/Hochfrequenz/bssclient.py/issues/25
         assert isinstance(actual, AufgabeStats)
         assert actual.stats["Ermittlungsauftrag"]["status"]["Beendet"] == 2692
+
+    @pytest.mark.parametrize(
+        "status_code, expected",
+        [
+            pytest.param(200, True),
+            pytest.param(400, False),
+            pytest.param(404, False),
+        ],
+    )
+    async def test_replay_event(self, bss_client_with_basic_auth, status_code: int, expected: bool) -> None:
+        client, bss_config = bss_client_with_basic_auth
+        random_uuid = uuid.uuid4()
+        with aioresponses() as mocked_bss:
+            mocked_patch_url = f"{bss_config.server_url}api/Event/replay/Prozess/{random_uuid}/17/false"
+            mocked_bss.patch(mocked_patch_url, status=status_code)
+            actual = await client.replay_event("Prozess", random_uuid, 17)
+        assert actual is expected

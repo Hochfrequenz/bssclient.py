@@ -47,3 +47,4 @@ async def test_get_events(bss_client_with_basic_auth, caplog) -> None:
         mocked_bss.get(mocked_get_url, status=200, payload=response_body)
         actual = await client.get_events("Prozess", random_guid)
     assert all(isinstance(x, EventHeader) for x in actual)
+    assert any(m for m in caplog.messages if "There might be a problem with the deserialization" in m)

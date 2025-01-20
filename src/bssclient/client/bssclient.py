@@ -14,6 +14,7 @@ from bssclient.client.config import BasicAuthBssConfig, BssConfig, OAuthBssConfi
 from bssclient.client.oauth import _OAuthHttpClient, token_is_valid
 from bssclient.models.aufgabe import AufgabeStats
 from bssclient.models.ermittlungsauftrag import Ermittlungsauftrag, _ListOfErmittlungsauftraege
+from bssclient.models.events import EventHeader, EventHeaders
 
 _logger = logging.getLogger(__name__)
 
@@ -155,6 +156,25 @@ class BssClient(ABC):
             result.extend([item for sublist in list_of_lists_of_io_from_chunk for item in sublist])
         _logger.info("Downloaded %i Ermittlungsautraege", len(result))
         return result
+
+    async def get_events(self, model_type: DomainModelType, model_id: uuid.UUID) -> list[EventHeader]:
+        """reads event headers from bss API"""
+        session = await self._get_session()
+        request_url = self._config.server_url / "api" / "Event" / model_type / str(model_id)
+        request_uuid = uuid.uuid4()
+        _logger.debug("[%s] requesting %s", str(request_uuid), request_url)
+        async with session.get(request_url) as response:
+            _logger.debug("[%s] response status: %s", str(request_uuid), response.status)
+            response_body = await response.json()
+        result = EventHeaders.model_validate(response_body)
+        if not result.is_continuous:
+            _logger.warning(
+                "The events for %s-%s are NOT continuous. There might be a problem with the deserialization",
+                model_type,
+                model_id,
+            )
+        _logger.debug("Read %i events from Aggregate %s-%s", len(result.root), model_type, model_id)
+        return result.root
 
     async def replay_event(self, model_type: DomainModelType, model_id: uuid.UUID, event_number: int) -> bool:
         """calls the re-apply endpoint"""

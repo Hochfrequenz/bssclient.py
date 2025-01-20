@@ -1,0 +1,77 @@
+[
+  {
+    "number": 0,
+    "name": "ProzessErzeugt-1.0.0",
+    "id": "d7e40c6e-c7ae-4ef5-b821-aa55fe085909"
+  },
+  {
+    "number": 1,
+    "name": "FooXMLEmpfangen-1.0.0",
+    "id": "d7e40c6e-c7ae-4ef5-b821-aa55fe085909"
+  },
+  {
+    "number": 2,
+    "name": "MappingDurchführen-1.0.0",
+    "id": "d7e40c6e-c7ae-4ef5-b821-aa55fe085909"
+  },
+  {
+    "number": 4,
+    "name": "MeLoIdentifizieren-1.0.0",
+    "id": "d7e40c6e-c7ae-4ef5-b821-aa55fe085909"
+  },
+  {
+    "number": 5,
+    "name": "FooAntwortSenden-1.0.0",
+    "id": "d7e40c6e-c7ae-4ef5-b821-aa55fe085909"
+  },
+  {
+    "number": 8,
+    "name": "MesslokationGeaendert-1.0.0",
+    "id": "d7e40c6e-c7ae-4ef5-b821-aa55fe085909"
+  },
+  {
+    "number": 9,
+    "name": "EigentuemerIdentifizieren-1.0.0",
+    "id": "d7e40c6e-c7ae-4ef5-b821-aa55fe085909"
+  },
+  {
+    "number": 10,
+    "name": "EigentuemerIdentifizieren-1.0.0",
+    "id": "d7e40c6e-c7ae-4ef5-b821-aa55fe085909"
+  },
+  {
+    "number": 12,
+    "name": "GeschaeftspartnerIdentifiziert-1.0.0",
+    "id": "d7e40c6e-c7ae-4ef5-b821-aa55fe085909"
+  },
+  {
+    "number": 13,
+    "name": "ProzessWartenBeendet-1.0.0",
+    "id": "d7e40c6e-c7ae-4ef5-b821-aa55fe085909"
+  },
+  {
+    "number": 14,
+    "name": "VertraegeAnBarSenden-1.0.0",
+    "id": "d7e40c6e-c7ae-4ef5-b821-aa55fe085909"
+  },
+  {
+    "number": 15,
+    "name": "VertraegeAnBarGesendet-1.0.0",
+    "id": "d7e40c6e-c7ae-4ef5-b821-aa55fe085909"
+  },
+  {
+    "number": 16,
+    "name": "VertragVonBarBestaetigtEvent-1.0.0",
+    "id": "d7e40c6e-c7ae-4ef5-b821-aa55fe085909"
+  },
+  {
+    "number": 17,
+    "name": "MarktdatenAnBarSenden-1.0.0",
+    "id": "d7e40c6e-c7ae-4ef5-b821-aa55fe085909"
+  },
+  {
+    "number": 18,
+    "name": "ProzessStatusGeändert-1.0.0",
+    "id": "d7e40c6e-c7ae-4ef5-b821-aa55fe085909"
+  }
+]

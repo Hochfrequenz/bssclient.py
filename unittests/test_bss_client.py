@@ -38,7 +38,6 @@ def test_oauth_config():
 async def test_get_events(bss_client_with_basic_auth, caplog) -> None:
     client, bss_config = bss_client_with_basic_auth
     random_guid = uuid.uuid4()
-    client.get_events("Prozess", random_guid)
     stats_json_file = Path(__file__).parent / "example_data" / "prozess-events.json"
     with open(stats_json_file, "r", encoding="utf-8") as infile:
         response_body = json.load(infile)

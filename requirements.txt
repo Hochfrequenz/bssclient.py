@@ -16,7 +16,7 @@ annotated-types==0.7.0
     # via pydantic
 anyio==4.8.0
     # via httpx
-attrs==24.3.0
+attrs==25.1.0
     # via aiohttp
 brotli==1.1.0
     # via aiohttp

@@ -213,7 +213,7 @@ class BasicAuthBssClient(BssClient):
     async def _get_session(self) -> ClientSession:
         """
         returns a client session (that may be reused or newly created)
-        re-using the same (threadsafe) session will be faster than re-creating a new session for every request.
+        reusing the same (threadsafe) session will be faster than re-creating a new session for every request.
         see https://docs.aiohttp.org/en/stable/http_request_lifecycle.html#how-to-use-the-clientsession
         """
         async with self._session_lock:
@@ -249,7 +249,7 @@ class OAuthBssClient(BssClient, _OAuthHttpClient):
     async def _get_session(self) -> ClientSession:
         """
         returns a client session (that may be reused or newly created)
-        re-using the same (threadsafe) session will be faster than re-creating a new session for every request.
+        reusing the same (threadsafe) session will be faster than re-creating a new session for every request.
         see https://docs.aiohttp.org/en/stable/http_request_lifecycle.html#how-to-use-the-clientsession
         """
         async with self._session_lock:

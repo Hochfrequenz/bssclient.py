@@ -6,7 +6,7 @@
 #
 aioauth-client==0.29.0
     # via bssclient (pyproject.toml)
-aiohappyeyeballs==2.5.0
+aiohappyeyeballs==2.6.1
     # via aiohttp
 aiohttp[speedups]==3.11.16
     # via bssclient (pyproject.toml)

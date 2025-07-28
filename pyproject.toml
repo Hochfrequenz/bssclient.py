@@ -48,7 +48,7 @@ spellcheck = [
 ]
 tests = [
     "aioresponses==0.7.8",
-    "pytest==8.4.0",
+    "pytest==8.4.1",
     "pytest-asyncio==1.0.0"
 ]
 type_check = [

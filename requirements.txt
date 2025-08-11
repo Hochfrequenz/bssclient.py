@@ -51,7 +51,7 @@ propcache==0.3.2
     #   yarl
 pydantic==2.10.6
     # via bssclient (pyproject.toml)
-pydantic-core==2.27.2
+pydantic-core==2.38.0
     # via pydantic
 pyjwt==2.10.1
     # via bssclient (pyproject.toml)

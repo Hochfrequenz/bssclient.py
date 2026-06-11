@@ -23,7 +23,10 @@ def token_is_valid(token) -> bool:
     try:
         decoded_token = jwt.decode(token, algorithms=["HS256"], options={"verify_signature": False})
         expiration_timestamp = decoded_token.get("exp")
-        expiration_datetime = datetime.fromtimestamp(expiration_timestamp)
+        if expiration_timestamp is None:
+            _logger.info("Token has no expiration timestamp")
+            return False
+        expiration_datetime = datetime.fromtimestamp(float(expiration_timestamp))
         _logger.debug("Token is valid until %s", expiration_datetime.isoformat())
         current_datetime = datetime.utcnow()
         token_is_valid_one_minute_into_the_future = expiration_datetime > current_datetime + timedelta(minutes=1)

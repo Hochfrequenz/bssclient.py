@@ -19,7 +19,7 @@ classifiers = [
 ]
 dependencies = [
     "pydantic>=2.0.0",
-    "aiohttp[speedups]>=3.9.3",
+    "aiohttp[speedups]>=3.9.3,<3.14",
     "more-itertools",
     "pytz",
     "pyjwt",

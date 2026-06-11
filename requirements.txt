@@ -10,7 +10,7 @@ aiodns==4.0.4
     # via aiohttp
 aiohappyeyeballs==2.6.2
     # via aiohttp
-aiohttp[speedups]==3.14.1
+aiohttp[speedups]==3.13.5
     # via bssclient (pyproject.toml)
 aiosignal==1.4.0
     # via aiohttp

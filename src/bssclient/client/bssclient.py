@@ -41,7 +41,7 @@ class BssClient(ABC):
         If the server_url is an IP address, None is returned.
         """
         # this method is unit tested; check the testcases to understand its branches
-        domain_parts = self._config.server_url.host.split(".")  # type:ignore[union-attr]
+        domain_parts = self._config.server_url.host.split(".")  # type: ignore[union-attr]
         if all(x.isnumeric() for x in domain_parts):
             # seems like this is an IP address
             return None

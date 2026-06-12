@@ -6,11 +6,9 @@
 #
 aioauth-client==0.30.1
     # via bssclient (pyproject.toml)
-aiodns==4.0.4
-    # via aiohttp
 aiohappyeyeballs==2.6.2
     # via aiohttp
-aiohttp[speedups]==3.13.5
+aiohttp==3.13.5
     # via bssclient (pyproject.toml)
 aiosignal==1.4.0
     # via aiohttp
@@ -20,16 +18,10 @@ anyio==4.13.0
     # via httpx
 attrs==26.1.0
     # via aiohttp
-backports-zstd==1.5.0
-    # via aiohttp
-brotli==1.2.0
-    # via aiohttp
 certifi==2026.5.20
     # via
     #   httpcore
     #   httpx
-cffi==2.0.0
-    # via pycares
 frozenlist==1.8.0
     # via
     #   aiohttp
@@ -55,10 +47,6 @@ propcache==0.5.2
     # via
     #   aiohttp
     #   yarl
-pycares==5.0.1
-    # via aiodns
-pycparser==3.0
-    # via cffi
 pydantic==2.13.4
     # via bssclient (pyproject.toml)
 pydantic-core==2.46.4
@@ -69,7 +57,6 @@ pytz==2026.2
     # via bssclient (pyproject.toml)
 typing-extensions==4.15.0
     # via
-    #   aiohttp
     #   aiosignal
     #   anyio
     #   pydantic

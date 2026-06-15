@@ -53,7 +53,7 @@ tests = [
     "pytest-asyncio==1.1.0"
 ]
 type_check = [
-    "mypy[pydantic]==1.17.1",
+    "mypy[pydantic]==2.1.0",
     "types-pytz==2026.2.0.20260518"
 ]
 

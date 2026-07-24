@@ -40,7 +40,7 @@ You can use any unmapped field returned by TMDS by using the [`model_extra` prop
 
 ## Development
 For development of this library, follow the instructions in our [Python Template Repository](https://github.com/Hochfrequenz/python_template_repository).
-tl;dr: `tox -e dev` will set up a development environment for you.
+tl;dr: `uv sync --group dev` will set up a development environment for you.
 
 ### Release (CI/CD)
 

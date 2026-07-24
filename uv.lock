@@ -318,7 +318,7 @@ linting = [
     { name = "pytest" },
     { name = "pytest-asyncio" },
 ]
-spellcheck = [
+spell-check = [
     { name = "codespell" },
 ]
 tests = [
@@ -376,7 +376,7 @@ linting = [
     { name = "pytest", specifier = "==8.4.1" },
     { name = "pytest-asyncio", specifier = "==1.1.0" },
 ]
-spellcheck = [{ name = "codespell", specifier = "==2.4.1" }]
+spell-check = [{ name = "codespell", specifier = "==2.4.1" }]
 tests = [
     { name = "aioresponses", specifier = "==0.7.8" },
     { name = "pytest", specifier = "==8.4.1" },

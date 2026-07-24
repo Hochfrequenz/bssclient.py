@@ -47,7 +47,7 @@ linting = [
     "pylint-pydantic==0.4.1",
     {include-group = "tests"}
 ]
-spellcheck = [
+spell_check = [
     "codespell==2.4.1"
 ]
 type_check = [
@@ -60,7 +60,7 @@ dev = [
     {include-group = "coverage"},
     {include-group = "formatting"},
     {include-group = "linting"},
-    {include-group = "spellcheck"},
+    {include-group = "spell_check"},
     {include-group = "type_check"},
     "pre-commit"
 ]

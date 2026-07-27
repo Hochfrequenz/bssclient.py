@@ -52,7 +52,7 @@ spell_check = [
 ]
 type_check = [
     "mypy[pydantic]==2.3.0",
-    "types-pytz==2026.2.0.20260518",
+    "types-pytz==2026.3.1.20260727",
     {include-group = "tests"}
 ]
 dev = [

@@ -32,7 +32,7 @@ dynamic = ["readme", "version"]
 tests = [
     "aioresponses==0.7.9",
     "pytest==8.4.1",
-    "pytest-asyncio==1.1.0"
+    "pytest-asyncio==1.4.0"
 ]
 coverage = [
     "coverage==7.15.2",

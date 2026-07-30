@@ -34,7 +34,7 @@ class BssClient(ABC):
         _logger.info("Instantiated BssClient with server_url %s", str(self._config.server_url))
 
     @abstractmethod
-    async def _get_session(self):
+    async def _get_session(self) -> ClientSession:
         raise NotImplementedError("The inheriting class has to implement this with its respective authentication")
 
     def get_top_level_domain(self) -> URL | None:

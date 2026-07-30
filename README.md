@@ -5,7 +5,7 @@
 ![Unittests status badge](https://github.com/Hochfrequenz/bssclient.py/workflows/Unittests/badge.svg)
 ![Coverage status badge](https://github.com/Hochfrequenz/bssclient.py/workflows/Coverage/badge.svg)
 ![Linting status badge](https://github.com/Hochfrequenz/bssclient.py/workflows/Linting/badge.svg)
-![Black status badge](https://github.com/Hochfrequenz/bssclient.py/workflows/Formatting/badge.svg)
+![Ruff status badge](https://github.com/Hochfrequenz/bssclient.py/workflows/Formatting/badge.svg)
 
 This repository contains the package `bssclient`.
 It is an async, fully typed Python client for the Basic Supply Service (BSS).

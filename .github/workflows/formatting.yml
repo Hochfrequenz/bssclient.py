@@ -5,11 +5,21 @@ on:
     branches: [main]
   pull_request: {}
 jobs:
+  # The "tool" matrix values (black/isort) and the "black (<tool>)" check names are kept unchanged on purpose,
+  # even though both now run ruff under the hood - they are required status checks in branch protection, and
+  # renaming them would need a coordinated update of that ruleset in the same change. The explicit `name:` below
+  # (referencing only `matrix.tool`) keeps the generated check name identical to before, since GitHub Actions
+  # would otherwise fold the new `command` matrix key into the auto-generated name too.
   black:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tool: ["black", "isort"]
+        include:
+          - tool: black
+            command: "ruff format --check ."
+          - tool: isort
+            command: "ruff check --select I ."
+    name: "black (${{ matrix.tool }})"
     steps:
       - uses: actions/checkout@v7
       - name: Install uv
@@ -17,7 +27,7 @@ jobs:
         with:
           python-version: "3.14"
       - name: Install dependencies
-        run: uv sync --group formatting
+        run: uv sync --group linting
       - name: ${{ matrix.tool }} Code Formatter
         run: |
-          uv run ${{ matrix.tool }} . --check
+          uv run ${{ matrix.command }}

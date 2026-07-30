@@ -22,8 +22,7 @@ jobs:
       - name: Run linting
         if: matrix.linter-env == 'linting'
         run: |
-          uv run pylint bssclient
-          uv run pylint unittests --rcfile=unittests/.pylintrc
+          uv run ruff check src/bssclient unittests
       - name: Run type_check
         if: matrix.linter-env == 'type_check'
         run: |

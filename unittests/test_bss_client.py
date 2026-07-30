@@ -39,7 +39,7 @@ async def test_get_events(bss_client_with_basic_auth, caplog) -> None:
     client, bss_config = bss_client_with_basic_auth
     random_guid = uuid.uuid4()
     stats_json_file = Path(__file__).parent / "example_data" / "prozess-events.json"
-    with open(stats_json_file, "r", encoding="utf-8") as infile:
+    with open(stats_json_file, encoding="utf-8") as infile:
         response_body = json.load(infile)
     with aioresponses() as mocked_bss:
         mocked_get_url = f"{bss_config.server_url}api/Event/Prozess/{random_guid}"

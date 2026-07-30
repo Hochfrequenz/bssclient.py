@@ -38,14 +38,8 @@ coverage = [
     "coverage==7.15.2",
     {include-group = "tests"}
 ]
-formatting = [
-    "black==26.5.1",
-    "isort==8.0.1"
-]
 linting = [
-    "pylint==4.0.6",
-    "pylint-pydantic==0.4.1",
-    {include-group = "tests"}
+    "ruff==0.16.0"
 ]
 spell_check = [
     "codespell==2.4.3"
@@ -58,7 +52,6 @@ type_check = [
 dev = [
     {include-group = "tests"},
     {include-group = "coverage"},
-    {include-group = "formatting"},
     {include-group = "linting"},
     {include-group = "spell_check"},
     {include-group = "type_check"},
@@ -72,21 +65,25 @@ default-groups = []
 Changelog = "https://github.com/Hochfrequenz/bssclient.py/releases"
 Homepage = "https://github.com/Hochfrequenz/bssclient.py"
 
-[tool.black]
+[tool.ruff]
 line-length = 120
-target_version = ["py311", "py312", "py313", "py314"]
+extend-exclude = ["*.md"]
 
-[tool.isort]
-line_length = 120
-profile = "black"
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "UP", "B", "N", "PL", "RUF"]
+ignore = [
+    "PLR0913", # too-many-arguments
+    "PLR0917", # too-many-positional-arguments
+    "PLR0912", # too-many-branches
+    "PLR0915", # too-many-statements
+    "PLR2004", # magic-value-comparison
+    "RUF001",  # ambiguous-unicode-character-string
+    "RUF002",  # ambiguous-unicode-character-docstring
+    "RUF003",  # ambiguous-unicode-character-comment
+]
 
-[tool.pylint."MESSAGES CONTROL"]
-max-line-length = 120
-disable = "fixme, too-few-public-methods"
-extension-pkg-whitelist = "pydantic"
-
-[tool.pylint]
-load-plugins = "pylint_pydantic"
+[tool.ruff.lint.pep8-naming]
+classmethod-decorators = ["pydantic.field_validator"]
 
 [tool.pytest.ini_options]
 # When the mode is auto, all discovered async tests are considered asyncio-driven

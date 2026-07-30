@@ -6,7 +6,6 @@ import asyncio
 import logging
 from abc import ABC
 from datetime import datetime, timedelta
-from typing import Optional
 
 import jwt
 from aioauth_client import OAuth2Client
@@ -72,7 +71,7 @@ class _OAuthHttpClient(_ValidateTokenMixin, ABC):  # pylint:disable=too-few-publ
             access_token_url=str(oauth_token_url),
             logger=_logger,
         )
-        self._token: Optional[str] = None  # the jwt token if we did an authenticated request before
+        self._token: str | None = None  # the jwt token if we did an authenticated request before
         self._token_write_lock = asyncio.Lock()
 
     async def _get_new_token(self) -> str:

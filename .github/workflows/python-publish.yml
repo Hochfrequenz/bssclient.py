@@ -27,8 +27,7 @@ jobs:
         run: uv run pytest
       - name: Run linting
         run: |
-          uv run pylint bssclient
-          uv run pylint unittests --rcfile=unittests/.pylintrc
+          uv run ruff check src/bssclient unittests
       - name: Run type_check
         run: |
           uv run mypy --show-error-codes src/bssclient

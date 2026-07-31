@@ -3,8 +3,9 @@
 import asyncio
 import logging
 import uuid
-from abc import ABC
-from typing import Awaitable, Literal, Optional, TypeAlias
+from abc import ABC, abstractmethod
+from collections.abc import Awaitable
+from typing import Literal, TypeAlias
 
 from aiohttp import BasicAuth, ClientResponseError, ClientSession, ClientTimeout
 from more_itertools import chunked
@@ -29,10 +30,11 @@ class BssClient(ABC):
     def __init__(self, config: BssConfig):
         self._config = config
         self._session_lock = asyncio.Lock()
-        self._session: Optional[ClientSession] = None
+        self._session: ClientSession | None = None
         _logger.info("Instantiated BssClient with server_url %s", str(self._config.server_url))
 
-    async def _get_session(self):
+    @abstractmethod
+    async def _get_session(self) -> ClientSession:
         raise NotImplementedError("The inheriting class has to implement this with its respective authentication")
 
     def get_top_level_domain(self) -> URL | None:

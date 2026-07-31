@@ -7,3 +7,5 @@ Find the TMDS Open API description here: https://techmasterdata.xtk-dev.de/index
 # convenience exports
 from .client.bssclient import BssClient
 from .client.config import BssConfig
+
+__all__ = ["BssClient", "BssConfig"]

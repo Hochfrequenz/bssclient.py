@@ -27,7 +27,7 @@ class EventHeaders(RootModel[list[EventHeader]]):
         returns true iff all event numbers are continuous.
         a gap like: 1,2,3,5 indicates that there is a problem with the event at position 4
         """
-        number_pairs = pairwise(sorted((x.number for x in self.root)))
+        number_pairs = pairwise(sorted(x.number for x in self.root))
         return all(abs(x - y) == 1 for x, y in number_pairs)
 
 
